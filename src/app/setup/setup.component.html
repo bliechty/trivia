@@ -1,0 +1,44 @@
+<mat-card>
+    <mat-card-content>
+        <mat-form-field>
+            <mat-label>Amount of Players:</mat-label>
+            <select matNativeControl>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+        </mat-form-field>
+        <mat-form-field>
+            <!-- max = 50, make sure it will divide correct between players -->
+            <mat-label>Number of Questions:</mat-label>
+            <input matInput type="number" value=10>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Select Category:</mat-label>
+            <mat-select required>
+                <mat-option *ngFor="let category of categories" [value]="category.value">{{category.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Select Difficulty:</mat-label>
+            <select matNativeControl>
+                <option value="any">Any Difficulty</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Select Type:</mat-label>
+            <select matNativeControl>
+                <option value="any">Any Type</option>
+                <option value="true/false">True or False</option>
+                <option value="boolean">Mutiple Choice</option>
+            </select>
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button>Let's Play!</button>
+    </mat-card-actions>
+</mat-card>
