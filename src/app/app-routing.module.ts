@@ -1,17 +1,26 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { SetupComponent } from "./setup/setup.component";
-import { LoginComponent } from "./login/login.component";
-import { GameInterfaceComponent } from "./game-interface/game-interface.component"
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { SetupComponent } from './setup/setup.component';
+import { LoginComponent } from './login/login.component';
+import { GameInterfaceComponent } from './game-interface/game-interface.component'
+
+import { AngularFireAuthGuard, redirectUnauthorizedTo, canActivate } from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['log-in']);
 
 const routes: Routes = [
   {
-    path: "set-up",
+    path: 'set-up',
     component: SetupComponent,
+    ...canActivate(redirectUnauthorizedToLogin)
   },
-  { path: "log-in", component: LoginComponent },
-  { path: "game", component: GameInterfaceComponent},
-  { path: "**", redirectTo: "log-in" },
+  { path: 'log-in', component: LoginComponent },
+  {
+    path: 'game',
+    component: GameInterfaceComponent,
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  { path: '**', redirectTo: 'log-in' },
 ];
 
 @NgModule({
