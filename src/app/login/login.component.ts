@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+
+import { faGoogle } from '@fortawesome/free-brands-svg-icons/faGoogle';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  google = faGoogle;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
+  signInWithGoogle(): void {
+    this.authService.loginWithGoogle();
+  }
 }
