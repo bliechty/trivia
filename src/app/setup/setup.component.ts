@@ -4,6 +4,7 @@ import { TriviaService } from '../services/trivia.service';
 import { Observable } from 'rxjs';
 import { Category } from '../interfaces/category';
 import { sameAmountValidator } from './same-amount.directive';
+import { SendDataService } from '../services/send-data.service';
 
 @Component({
   selector: 'app-setup',
@@ -20,7 +21,8 @@ export class SetupComponent implements OnInit {
 
 
   constructor(
-    private triviaService: TriviaService
+    private triviaService: TriviaService,
+    private sendDataService: SendDataService
   ) { }
 
   ngOnInit(): void {
@@ -46,8 +48,13 @@ export class SetupComponent implements OnInit {
     this.categories$ = this.triviaService.getCategoriesObservable();
   }
 
+  sendData() {
+    this.sendDataService.sendGameData(this.setUpForm.value)
+  }
+
   submitForm() {
     console.log(this.setUpForm.value)
+    this.sendData()
   }
 
 }
