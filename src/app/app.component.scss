@@ -1,0 +1,13 @@
+#toolbar-row {
+  display: flex;
+  justify-content: space-between;
+  #routes {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    #logout {
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
+}

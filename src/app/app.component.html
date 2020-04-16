@@ -1,6 +1,12 @@
 <mat-toolbar color="accent">
-    <mat-toolbar-row>
+    <mat-toolbar-row id="toolbar-row">
+      <h1>Trivia</h1>
 
+      <div id="routes">
+        <button routerLink="/set-up" mat-raised-button>Game Set Up</button>
+        <button mat-raised-button>Stats</button>
+        <a (click)="logout()" id="logout">Logout</a>
+      </div>
     </mat-toolbar-row>
 </mat-toolbar>
 
