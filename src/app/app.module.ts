@@ -21,13 +21,15 @@ import { environment } from 'src/environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SameAmountValidatortDirective } from './setup/same-amount.directive';
+import { GameInterfaceComponent } from './game-interface/game-interface.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SetupComponent,
     LoginComponent,
-    SameAmountValidatortDirective
+    SameAmountValidatortDirective,
+    GameInterfaceComponent
   ],
   imports: [
     BrowserModule,
