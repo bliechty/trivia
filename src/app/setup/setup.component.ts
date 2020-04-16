@@ -12,11 +12,6 @@ import { sameAmountValidator } from './same-amount.directive';
 })
 export class SetupComponent implements OnInit {
   categories$: Observable<Category[]>
-  categories: any[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
 
   game = {amount: 1, questionNum: 10, category:"any", difficulty:'any', type: 'any'}
 
