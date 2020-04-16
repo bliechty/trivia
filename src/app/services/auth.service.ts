@@ -36,6 +36,11 @@ export class AuthService {
     this.router.navigate(['set-up']);
   }
 
+  async loginWithFacebook() {
+    await this.afa.signInWithPopup(new auth.FacebookAuthProvider());
+    this.router.navigate(['set-up']);
+  }
+
   async logout(){
     await this.afa.signOut();
     this.router.navigate(['log-in']);
