@@ -30,7 +30,7 @@ export class TriviaService {
     difficulty: string,
     questionType: string
   ): Observable<Array<Result>> {
-    const a = amountOfQuestions ? `amount=${amountOfQuestions}` : '';
+    const a = `amount=${amountOfQuestions}`;
     const c = categoryId ? `category=${categoryId}` : '';
     const d = difficulty ? `difficulty=${difficulty}` : '';
     const qt = questionType ? `type=${questionType}` : '';

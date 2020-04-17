@@ -42,25 +42,27 @@
                 <mat-label>Select Category:</mat-label>
                 <mat-select [(value)]="selected" formControlName="category">
                     <mat-option value="any">Any Category</mat-option>
-                    <mat-option *ngFor="let category of categories$ | async" [value]="category.id">{{category.name}}
+                    <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+
             <mat-form-field>
                 <mat-label>Select Difficulty:</mat-label>
                 <select matNativeControl formControlName="difficulty">
-                    <option value="any">Any Difficulty</option>
+                    <option value=null>Any Difficulty</option>
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
                 </select>
             </mat-form-field>
+
             <mat-form-field>
                 <mat-label>Select Type:</mat-label>
                 <select matNativeControl formControlName="type">
-                    <option value="any">Any Type</option>
-                    <option value="mutiple">True or False</option>
-                    <option value="boolean">Mutiple Choice</option>
+                    <option value=null>Any Type</option>
+                    <option value="boolean">True or False</option>
+                    <option value="multiple">Mutiple Choice</option>
                 </select>
             </mat-form-field>
             <button mat-raised-button color="primary" type="submit" [disabled]="setUpForm.invalid">Let's Play!</button>
