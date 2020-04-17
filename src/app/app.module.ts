@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -20,8 +21,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 import { SameAmountValidatortDirective } from './setup/same-amount.directive';
 import { GameInterfaceComponent } from './game-interface/game-interface.component';
+import { UserStatsComponent } from './user-stats/user-stats.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { GameInterfaceComponent } from './game-interface/game-interface.componen
     SetupComponent,
     LoginComponent,
     SameAmountValidatortDirective,
-    GameInterfaceComponent
+    GameInterfaceComponent,
+    UserStatsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +46,8 @@ import { GameInterfaceComponent } from './game-interface/game-interface.componen
     MatInputModule,
     MatButtonModule,
     MatCardModule,
+    MatListModule,
+    MatProgressSpinnerModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

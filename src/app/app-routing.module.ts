@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { GameInterfaceComponent } from './game-interface/game-interface.component'
 
 import { redirectUnauthorizedTo, canActivate } from '@angular/fire/auth-guard';
+import { UserStatsComponent } from './user-stats/user-stats.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['log-in']);
 
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: 'game',
     component: GameInterfaceComponent,
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
+    path: 'userStats',
+    component: UserStatsComponent,
     ...canActivate(redirectUnauthorizedToLogin)
   },
   { path: '**', redirectTo: 'log-in' },
