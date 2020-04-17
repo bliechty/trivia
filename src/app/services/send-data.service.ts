@@ -5,19 +5,19 @@ import { Subject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SendDataService {
-  private subject = new Subject<any>();
+  data
 
   constructor() { }
 
   sendGameData(game: any[]) {
-    this.subject.next({game})
+    this.data=game
   }
 
-  clearGameData() {
-    this.subject.next()
-  }
+  // clearGameData() {
+  //   this.subject.next()
+  // }
 
-  getGameData(): Observable<any> {
-    return this.subject.asObservable()
+  getGameData() {
+    return this.data
   }
 }
