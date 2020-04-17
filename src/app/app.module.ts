@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,13 +22,15 @@ import { environment } from 'src/environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SameAmountValidatortDirective } from './setup/same-amount.directive';
+import { PlayerDialogComponent } from './setup/player-dialog/player-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SetupComponent,
     LoginComponent,
-    SameAmountValidatortDirective
+    SameAmountValidatortDirective,
+    PlayerDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +43,7 @@ import { SameAmountValidatortDirective } from './setup/same-amount.directive';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
