@@ -15,6 +15,7 @@ export class AuthService {
   user: User;
 
   loggedInChange: Subject<boolean> = new Subject<boolean>();
+  firstNameChange: Subject<string> = new Subject<string>();
 
   constructor(
     private af: AngularFirestore,
@@ -23,11 +24,12 @@ export class AuthService {
   ) {
     this.afa.authState.subscribe(user => {
       if (user) {
-        this.loggedInChange.next(true);
-
         this.user = user.providerData[0];
 
-        const usersRef = this.af.collection('users').doc(this.user.uid)
+        this.loggedInChange.next(true);
+        this.firstNameChange.next(this.user.displayName.replace(/\s.+/, ''));
+
+        const usersRef = this.af.collection('users').doc(this.user.uid);
 
         usersRef.update({...this.user}).catch(_ => {
           usersRef.set({...this.user});

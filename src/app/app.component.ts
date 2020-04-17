@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +10,17 @@ export class AppComponent implements OnInit {
   title = 'trivia';
 
   loggedIn: boolean;
+  firstName: string;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.authService.loggedInChange.subscribe(value => {
-      this.loggedIn = value;
+    this.authService.loggedInChange.subscribe(bool => {
+      this.loggedIn = bool;
+    });
+
+    this.authService.firstNameChange.subscribe(firstName => {
+      this.firstName = firstName;
     });
   }
 
