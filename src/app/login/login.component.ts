@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 
 import { faGoogle } from '@fortawesome/free-brands-svg-icons/faGoogle';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons/faFacebook';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,17 @@ export class LoginComponent implements OnInit {
   google = faGoogle;
   facebook = faFacebook;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.authService.loggedInChange.subscribe(bool => {
+      if (bool) {
+        this.router.navigate(['set-up']);
+      }
+    });
   }
 
   signInWithGoogle(): void {
