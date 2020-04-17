@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { TriviaService } from '../services/trivia.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Category } from '../interfaces/category';
 import { sameAmountValidator } from './same-amount.directive';
 import { SendDataService } from '../services/send-data.service';
@@ -15,11 +15,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./setup.component.scss']
 })
 export class SetupComponent implements OnInit {
-  categories: Category[]
+  categories: Category[];
   questions;
 
-  game = { amount: 1, questionNum: 10, category: "any", difficulty: null, type: null }
-  playerAmount = [1, 2, 3]
+  categoriesSubscription: Subscription;
+
+  game = { amount: 1, questionNum: 10, category: "any", difficulty: null, type: null };
+  playerAmount = [1, 2, 3];
 
   setUpForm: FormGroup;
   selected = 'any';
@@ -50,10 +52,15 @@ export class SetupComponent implements OnInit {
     this.getCategories()
   }
 
+  ngOnDestroy() {
+    this.categoriesSubscription.unsubscribe();
+  }
+
   get questionNum() { return this.setUpForm.get('questionNum') }
 
   getCategories() {
-    this.triviaService.getCategoriesObservable().subscribe(categories => this.categories = categories);
+    this.categoriesSubscription = this.triviaService.getCategoriesObservable()
+      .subscribe(categories => this.categories = categories);
   }
 
   chooseUser() {

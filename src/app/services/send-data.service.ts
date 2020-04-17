@@ -5,7 +5,7 @@ import { Subject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SendDataService {
-  data
+  data;
 
   constructor() { }
 
