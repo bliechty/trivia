@@ -4,7 +4,7 @@
 
       <div id="routes">
         <button routerLink="/set-up" mat-raised-button>Game Set Up</button>
-        <button mat-raised-button>Stats</button>
+        <button routerLink="/userStats" mat-raised-button>Stats</button>
         <a (click)="logout()" id="logout" *ngIf="loggedIn">Logout</a>
       </div>
     </mat-toolbar-row>
