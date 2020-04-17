@@ -1,0 +1,10 @@
+<mat-card class="example-card">
+	<mat-card-header>
+		<mat-card-title> {{ currentQuestions['question'] }} </mat-card-title>
+	</mat-card-header>
+	<mat-card-actions>
+		<button mat-button *ngFor="let answer of currentQuestions['answers']" [value]="answer" (click)="selectAnswer(answer)">
+			{{ answer }}
+		</button>
+	</mat-card-actions>
+</mat-card>
