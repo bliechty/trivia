@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -6,10 +6,18 @@ import { AuthService } from './services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'trivia';
 
-  constructor(private authService: AuthService) {}
+  loggedIn: boolean;
+
+  constructor(private authService: AuthService) { }
+
+  ngOnInit() {
+    this.authService.loggedInChange.subscribe(value => {
+      this.loggedIn = value;
+    });
+  }
 
   logout() {
     this.authService.logout();

@@ -6,12 +6,15 @@ import { auth } from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../interfaces/user';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   user: User;
+
+  loggedInChange: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private af: AngularFirestore,
@@ -20,6 +23,8 @@ export class AuthService {
   ) {
     this.afa.authState.subscribe(user => {
       if (user) {
+        this.loggedInChange.next(true);
+
         this.user = user.providerData[0];
 
         const usersRef = this.af.collection('users').doc(this.user.uid)
@@ -42,6 +47,7 @@ export class AuthService {
   }
 
   async logout(){
+    this.loggedInChange.next(false);
     await this.afa.signOut();
     this.router.navigate(['log-in']);
   }
