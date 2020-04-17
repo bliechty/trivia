@@ -14,9 +14,7 @@ export class TriviaService {
 
   constructor(
     private http: HttpClient
-  ) {
-    this.getQuestionsObservable(10, 3, 'medium', null);
-  }
+  ) { }
 
   getCategoriesObservable(): Observable<Array<Category>> {
     return this.http.get<TopLevel>(this.categoriesUrl).pipe(
