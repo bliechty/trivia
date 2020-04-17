@@ -14,7 +14,9 @@ export class TriviaService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    this.getQuestionsObservable(10, 3, 'medium', null);
+  }
 
   getCategoriesObservable(): Observable<Array<Category>> {
     return this.http.get<TopLevel>(this.categoriesUrl).pipe(
@@ -30,11 +32,11 @@ export class TriviaService {
     difficulty: string,
     questionType: string
   ): Observable<Array<Result>> {
-    const a = amountOfQuestions ? `?amount=${amountOfQuestions}` : '';
-    const c = categoryId ? `?category=${categoryId}` : '';
-    const d = difficulty ? `?difficult=${difficulty}` : '';
-    const qt = questionType ? `?type=${questionType}` : '';
-    const url = `https://opentdb.com/api.php${a}&${c}&${d}&${qt}`;
+    const a = amountOfQuestions ? `amount=${amountOfQuestions}` : '';
+    const c = categoryId ? `category=${categoryId}` : '';
+    const d = difficulty ? `difficulty=${difficulty}` : '';
+    const qt = questionType ? `type=${questionType}` : '';
+    const url = `https://opentdb.com/api.php?${a}&${c}&${d}&${qt}`.replace(/&+$/, '');
     return this.http.get<TopLevel>(url).pipe(
       map((obj: TopLevel) => {
         return obj.results;
