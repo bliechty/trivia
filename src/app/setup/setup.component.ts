@@ -8,6 +8,7 @@ import { SendDataService } from '../services/send-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PlayerDialogComponent } from './player-dialog/player-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Result } from '../interfaces/result';
 
 @Component({
   selector: 'app-setup',
@@ -16,7 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SetupComponent implements OnInit {
   categories: Category[];
-  questions;
+  questions: Array<Result>;
 
   categoriesSubscription: Subscription;
 
@@ -73,12 +74,12 @@ export class SetupComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
-      })
+      });
     }
   }
 
   sendData(dataArray) {
-    this.sendDataService.sendGameData(dataArray)
+    this.sendDataService.sendGameData(dataArray);
   }
 
   submitForm() {
@@ -90,8 +91,8 @@ export class SetupComponent implements OnInit {
       this.setUpForm.value.category,
       this.setUpForm.value.difficulty,
       this.setUpForm.value.type
-      ).subscribe(question => {
-        this.questions = question
+      ).subscribe(questions => {
+        this.questions = questions
         if(this.questions !== []) {
           this.router.navigate(['/game'])
           this.sendData(this.questions)
@@ -99,7 +100,7 @@ export class SetupComponent implements OnInit {
         else {
           console.log('error')
         }
-      })
+      });
     
   }
 
