@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Category } from '../interfaces/category';
 import { sameAmountValidator } from './same-amount.directive';
 import { SendDataService } from '../services/send-data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PlayerDialogComponent } from './player-dialog/player-dialog.component';
 
 @Component({
   selector: 'app-setup',
@@ -14,14 +16,16 @@ import { SendDataService } from '../services/send-data.service';
 export class SetupComponent implements OnInit {
   categories$: Observable<Category[]>
 
-  game = {amount: 1, questionNum: 10, category:"any", difficulty:'any', type: 'any'}
+  game = { amount: 1, questionNum: 10, category: "any", difficulty: 'any', type: 'any' }
+  playerAmount = [1, 2, 3]
 
   setUpForm: FormGroup;
   selected = 'any';
 
   constructor(
     private triviaService: TriviaService,
-    private sendDataService: SendDataService
+    private sendDataService: SendDataService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -36,15 +40,29 @@ export class SetupComponent implements OnInit {
       'category': new FormControl(this.game.category),
       'difficulty': new FormControl(this.game.difficulty),
       'type': new FormControl(this.game.type)
-    }, {validators: sameAmountValidator})
+    }, { validators: sameAmountValidator })
 
     this.getCategories()
   }
 
-  get questionNum() {return this.setUpForm.get('questionNum')}
+  get questionNum() { return this.setUpForm.get('questionNum') }
 
   getCategories() {
     this.categories$ = this.triviaService.getCategoriesObservable();
+  }
+
+  chooseUser() {
+    console.log(this.setUpForm.value.amount)
+    if (Number(this.setUpForm.value.amount) > 1) {
+      const dialogRef = this.dialog.open(PlayerDialogComponent, {
+        width: '600px',
+        data: {}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      })
+    }
   }
 
   sendData() {
