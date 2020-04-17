@@ -22,7 +22,7 @@ export class TriviaService {
         return obj.trivia_categories;
       })
     );
-  }
+  } 
 
   getQuestionsObservable(
     amountOfQuestions: number,

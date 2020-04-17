@@ -19,7 +19,6 @@ export class SetupComponent implements OnInit {
   setUpForm: FormGroup;
   selected = 'any';
 
-
   constructor(
     private triviaService: TriviaService,
     private sendDataService: SendDataService
