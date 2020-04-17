@@ -21,8 +21,11 @@ export class AuthService {
     this.afa.authState.subscribe(user => {
       if (user) {
         this.user = user.providerData[0];
-        this.af.collection('users').doc(this.user.uid).set({
-          user: this.user
+
+        const usersRef = this.af.collection('users').doc(this.user.uid)
+
+        usersRef.update({...this.user}).catch(_ => {
+          usersRef.set({...this.user});
         });
       }
     });
@@ -30,6 +33,11 @@ export class AuthService {
 
   async loginWithGoogle() {
     await this.afa.signInWithPopup(new auth.GoogleAuthProvider());
+    this.router.navigate(['set-up']);
+  }
+
+  async loginWithFacebook() {
+    await this.afa.signInWithPopup(new auth.FacebookAuthProvider());
     this.router.navigate(['set-up']);
   }
 
