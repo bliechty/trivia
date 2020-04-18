@@ -30,8 +30,6 @@ import { SameAmountValidatortDirective } from './setup/same-amount.directive';
 import { PlayerDialogComponent } from './setup/player-dialog/player-dialog.component';
 import { GameInterfaceComponent } from './game-interface/game-interface.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
-import { Resolver } from './setup/resolver';
-import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -68,7 +66,7 @@ import { from } from 'rxjs';
     MatToolbarModule,
     HttpClientModule
   ],
-  providers: [Resolver],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
