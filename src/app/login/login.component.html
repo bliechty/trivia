@@ -1,17 +1,15 @@
-<button
-  id='google'
-  mat-raised-button
-  (click)='signInWithGoogle()'
->
-  <fa-icon [icon]='google'></fa-icon>
-  <span>Google</span>
-</button>
+<mat-card>
+  <mat-card-title>Sign In</mat-card-title>
+  <mat-card-subtitle>To Start Playing</mat-card-subtitle>
+  <mat-card-content>
+    <button id='google' mat-raised-button (click)='signInWithGoogle()'>
+      <fa-icon [icon]='google'></fa-icon>
+      <span>Continue with Google</span>
+    </button>
 
-<button
-  id='facebook'
-  mat-raised-button
-  (click)='signInWithFacebook()'
->
-  <fa-icon [icon]='facebook'></fa-icon>
-  <span>Facebook</span>
-</button>
+    <button id='facebook' mat-raised-button (click)='signInWithFacebook()'>
+      <fa-icon [icon]='facebook'></fa-icon>
+      <span>Continue with Facebook</span>
+    </button>
+  </mat-card-content>
+</mat-card>

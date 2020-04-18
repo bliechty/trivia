@@ -11,7 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -23,11 +24,14 @@ import { environment } from 'src/environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 import { SameAmountValidatortDirective } from './setup/same-amount.directive';
 import { PlayerDialogComponent } from './setup/player-dialog/player-dialog.component';
 import { GameInterfaceComponent } from './game-interface/game-interface.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
 import { Resolver } from './setup/resolver';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,10 @@ import { Resolver } from './setup/resolver';
     MatDialogModule,
     MatListModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
     HttpClientModule,
+    MatMenuModule,
+    MatIconModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -64,4 +71,4 @@ import { Resolver } from './setup/resolver';
   providers: [Resolver],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -8,6 +8,7 @@ import { SendDataService } from '../services/send-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PlayerDialogComponent } from './player-dialog/player-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-setup',
@@ -29,7 +30,8 @@ export class SetupComponent implements OnInit {
     private sendDataService: SendDataService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -85,12 +87,15 @@ export class SetupComponent implements OnInit {
       this.setUpForm.value.type
       ).subscribe(question => {
         this.questions = question
-        if(this.questions !== []) {
+        if(this.questions.length !== 0) {
           this.router.navigate(['/game'])
           this.sendData(this.questions)
         }
         else {
-          console.log('error')
+          this.snackBar.open("OOPS! There doesn't seem to be any questions matching your set up!", "Close", {
+            duration: 2000,
+            panelClass: ['mat-toolbar', 'mat-warn']
+          })
         }
       })
     

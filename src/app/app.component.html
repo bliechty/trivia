@@ -1,16 +1,19 @@
 <mat-toolbar color="accent">
-    <mat-toolbar-row id="toolbar-row">
-      <h1>Trivia</h1>
+  <mat-toolbar-row id="toolbar-row">
+    <h1>Trivia</h1>
 
-      <div id="routes">
-        <button routerLink="/set-up" mat-raised-button>Game Set Up</button>
-        <button routerLink="/userStats" mat-raised-button>Stats</button>
-        <div *ngIf="loggedIn">
-          <a (click)="logout()" id="logout">Logout</a>
-          <span id="message">Hello, {{ firstName }}!</span>
-        </div>
+    <div id="routes" *ngIf="loggedIn">
+        <button routerLink="/set-up" mat-raised-button color="primary">Game Set Up</button>
+
+        <button mat-raised-button [matMenuTriggerFor]="menu" id="message">
+          {{ firstName }} <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" class="mat-toolbar mat-warn">
+          <button mat-menu-item (click)="logout()" id="logout">Logout</button>
+          <button mat-menu-item routerLink="/userStats">Stats</button>
+        </mat-menu>
       </div>
-    </mat-toolbar-row>
+  </mat-toolbar-row>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
