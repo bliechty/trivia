@@ -26,6 +26,10 @@ export class AuthService {
       if (user) {
         this.user = user.providerData[0];
 
+        this.getUserByIdObservable().subscribe(user => {
+          console.log(user);
+        });
+
         this.loggedInChange.next(true);
         this.firstNameChange.next(this.user.displayName.replace(/\s.+/, ''));
 
@@ -56,5 +60,9 @@ export class AuthService {
 
   getAllUsersObservable(): Observable<Array<User>> {
     return this.af.collection<User>('users').valueChanges();
+  }
+
+  getUserByIdObservable(): Observable<User> {
+    return this.af.collection('users').doc<User>(this.user.uid).valueChanges();
   }
 }
