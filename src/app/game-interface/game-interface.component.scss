@@ -19,8 +19,14 @@ button, button:disabled {
 	margin: 3px !important;
 }
 button.incorrect:disabled {
-	background-color: #ee5555 !important;
+	background-color: #c43c3c !important;
+	color: #fff !important;
+	transition: background-color 0.05s;
+	transition: color 0.2s;
 }
 button.correct:disabled {
-	background-color: #55bb55 !important;
+	background-color: #49a549 !important;
+	color: #fff !important;
+	transition: background-color 0.05s;
+	transition: color 0.2s;
 }
