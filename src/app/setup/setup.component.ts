@@ -10,6 +10,7 @@ import { PlayerDialogComponent } from './player-dialog/player-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Result } from '../interfaces/result';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Data } from '../interfaces/data';
 
 @Component({
   selector: 'app-setup',
@@ -18,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SetupComponent implements OnInit {
   categories: Category[];
-  data = {
+  data: Data = {
     questions: [],
     users: []
     }

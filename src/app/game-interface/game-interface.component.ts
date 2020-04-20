@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { SendDataService } from '../services/send-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Result } from '../interfaces/result';
+import { Data } from '../interfaces/data';
 
 @Component({
 	selector: 'app-game-interface',
@@ -25,7 +26,7 @@ export class GameInterfaceComponent implements OnInit {
 		private sendDataService: SendDataService,
 		private router: Router
 	){
-		let dataObject = this.sendDataService.getGameData()
+		let dataObject: Data = this.sendDataService.getGameData()
 		this.questions = dataObject["questions"]
 		this.changeQuestion()
 	}
@@ -52,7 +53,7 @@ export class GameInterfaceComponent implements OnInit {
 			}
 		}
 		else {
-			let dataObject = this.sendDataService.getGameData()
+			let dataObject: Data = this.sendDataService.getGameData()
 			this.questions = dataObject["questions"]
 			if (this.questions.length > 0) {
 				this.changeQuestion()
