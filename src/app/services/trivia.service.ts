@@ -5,6 +5,9 @@ import { map } from 'rxjs/operators';
 import { TopLevel } from '../interfaces/toplevel';
 import { Category } from '../interfaces/category';
 import { Result } from '../interfaces/result';
+import { User } from '../interfaces/user';
+import { AuthService } from './auth.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +16,9 @@ export class TriviaService {
   categoriesUrl: string = 'https://opentdb.com/api_category.php';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService,
+    private af: AngularFirestore
   ) { }
 
   getCategoriesObservable(): Observable<Array<Category>> {
@@ -40,5 +45,13 @@ export class TriviaService {
         return obj.results;
       })
     )
+  }
+
+  getAllUsersObservable(): Observable<Array<User>> {
+    return this.af.collection<User>('users').valueChanges();
+  }
+
+  getUserByIdObservable(): Observable<User> {
+    return this.af.collection('users').doc<User>(this.authService.user.uid).valueChanges();
   }
 }

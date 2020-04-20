@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SendDataService } from '../services/send-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Result } from '../interfaces/result';
 
 @Component({
 	selector: 'app-game-interface',
@@ -14,7 +15,7 @@ export class GameInterfaceComponent implements OnInit {
 		"answers": []
 	}
 	users: string[] = []
-	questions: any[] = []
+	questions: Result[] = []
 	count: number = 0
 
 	constructor(

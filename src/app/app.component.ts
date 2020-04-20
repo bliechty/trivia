@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from './interfaces/user';
 
 @Component({
   selector: 'app-root',
