@@ -13,8 +13,8 @@ export class GameInterfaceComponent implements OnInit {
 		"question": "",
 		"answers": []
 	}
-	users: string[] = [""]
-	questions: any[] = [""]
+	users: string[] = []
+	questions: any[] = []
 	count: number = 0
 
 	constructor(
