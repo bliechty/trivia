@@ -13,6 +13,12 @@ mat-card, mat-card-actions {
 	margin-bottom: 50px;
 }
 
+.incorrect {
+	background-color: #ee5555
+}
+.correct {
+	background-color: #55bb55
+}
 button, button:disabled {
 	background-color: #fff !important;
 	color: #333 !important;
