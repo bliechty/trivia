@@ -25,7 +25,7 @@ export class GameInterfaceComponent implements OnInit {
 		private sendDataService: SendDataService,
 		private router: Router
 	){
-		let dataObject: object = this.sendDataService.getGameData()
+		let dataObject = this.sendDataService.getGameData()
 		this.questions = dataObject["questions"]
 		this.changeQuestion()
 	}
@@ -52,7 +52,7 @@ export class GameInterfaceComponent implements OnInit {
 			}
 		}
 		else {
-			let dataObject: object = this.sendDataService.getGameData()
+			let dataObject = this.sendDataService.getGameData()
 			this.questions = dataObject["questions"]
 			if (this.questions.length > 0) {
 				this.changeQuestion()
