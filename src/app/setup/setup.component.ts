@@ -22,7 +22,7 @@ export class SetupComponent implements OnInit {
 
   categoriesSubscription: Subscription;
 
-  game = { amount: 1, questionNum: 10, category: "any", difficulty: null, type: null };
+  game = { amount: 1, questionNum: 10, category: "any", difficulty: "any", type: "any" };
   playerAmount = [1, 2, 3];
 
   setUpForm: FormGroup;
@@ -85,27 +85,28 @@ export class SetupComponent implements OnInit {
   }
 
   submitForm() {
-    if(this.setUpForm.value.category === "any"){
-      this.setUpForm.value.category = null
-    }
+    let category = this.setUpForm.value.category;
+    let difficulty = this.setUpForm.value.difficulty;
+    let type = this.setUpForm.value.type;
+
     this.triviaService.getQuestionsObservable(
       this.setUpForm.value.questionNum,
-      this.setUpForm.value.category,
-      this.setUpForm.value.difficulty,
-      this.setUpForm.value.type
-      ).subscribe(questions => {
-        this.questions = questions
-        if(this.questions.length !== 0) {
-          this.router.navigate(['/game'])
-          this.sendData(this.questions)
-        }
-        else {
-          this.snackBar.open("OOPS! There doesn't seem to be any questions matching your set up!", "Close", {
-            duration: 2000,
-            panelClass: ['mat-toolbar', 'mat-warn']
-          })
-        }
-      });
+      category === "any" ? null : category,
+      difficulty === "any" ? null : difficulty,
+      type === "any" ? null : type
+    ).subscribe(questions => {
+      this.questions = questions
+      if(this.questions.length !== 0) {
+        this.router.navigate(['/game'])
+        this.sendData(this.questions)
+      }
+      else {
+        this.snackBar.open("OOPS! There doesn't seem to be any questions matching your set up!", "Close", {
+          duration: 2000,
+          panelClass: ['mat-toolbar', 'mat-warn']
+        })
+      }
+    });
     
   }
 
