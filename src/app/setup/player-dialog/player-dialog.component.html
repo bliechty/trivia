@@ -1,18 +1,13 @@
 <h1 matDialogTitle>Choose Who's Playing</h1>
+<mat-card-subtitle *ngIf="nextPlayer">Choose player {{data.amount}}</mat-card-subtitle>
 
-<div matDialogContent>
-    <mat-card class="mat">
-        <img mat-card-avatar src="https://static.techspot.com/images2/news/bigimage/2019/05/2019-05-03-image.jpg">
-        <mat-card-title>Sonic</mat-card-title>
+<mat-dialog-content>
+    <mat-card (click)="playerClicked(player)" *ngFor="let player of players">
+        <img mat-card-avatar [src]="player.photoURL">
+        <mat-card-title>{{player.displayName}}</mat-card-title>
     </mat-card>
-    <mat-card>
-        <img mat-card-avatar
-            src="https://i.dailymail.co.uk/i/pix/2013/03/11/article-2291620-189071B4000005DC-520_306x390.jpg">
-        <mat-card-title>Tails</mat-card-title>
-    </mat-card>
-    <mat-card>
-        <img mat-card-avatar
-            src="https://vignette.wikia.nocookie.net/meme/images/e/e5/Stoopid_Meme.png/revision/latest?cb=20180814025755">
-        <mat-card-title>Knuckles</mat-card-title>
-    </mat-card>
-</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button (click)="onCancel()">Cancel</button>
+</mat-dialog-actions>
