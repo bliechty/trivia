@@ -25,7 +25,7 @@ export class GameInterfaceComponent implements OnInit {
 		private sendDataService: SendDataService,
 		private router: Router
 	){
-		this.questions = this.sendDataService.getGameData()
+		this.questions = this.sendDataService.getGameData()["questions"]
 		this.changeQuestion()
 	}
 	ngOnInit(): void {
@@ -51,7 +51,7 @@ export class GameInterfaceComponent implements OnInit {
 			}
 		}
 		else {
-			this.questions = this.sendDataService.getGameData()
+			this.questions = this.sendDataService.getGameData()["questions"]
 			if (this.questions.length > 0) {
 				this.changeQuestion()
 			}
