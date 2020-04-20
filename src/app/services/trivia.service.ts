@@ -35,6 +35,7 @@ export class TriviaService {
     const d = difficulty ? `difficulty=${difficulty}` : '';
     const qt = questionType ? `type=${questionType}` : '';
     const url = `https://opentdb.com/api.php?${a}&${c}&${d}&${qt}`.replace(/&+$/, '').replace(/&+/, '&');
+    console.log(url);
     return this.http.get<TopLevel>(url).pipe(
       map((obj: TopLevel) => {
         return obj.results;
