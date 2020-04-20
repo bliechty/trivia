@@ -92,8 +92,8 @@ export class SetupComponent implements OnInit {
     }
   }
 
-  sendData(dataArray) {
-    this.sendDataService.sendGameData(dataArray);
+  sendData(data) {
+    this.sendDataService.sendGameData(data);
   }
 
   submitForm() {

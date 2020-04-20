@@ -7,7 +7,10 @@ import { Data } from '../interfaces/data';
   providedIn: 'root'
 })
 export class SendDataService {
-  data: Data;
+  data: Data = {
+    users: [],
+    questions: []
+  };
 
   constructor() { }
 
