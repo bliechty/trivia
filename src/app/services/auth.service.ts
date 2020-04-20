@@ -6,7 +6,7 @@ import { auth } from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../interfaces/user';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -52,5 +52,9 @@ export class AuthService {
     this.loggedInChange.next(false);
     await this.afa.signOut();
     this.router.navigate(['log-in']);
+  }
+
+  getAllUsersObservable(): Observable<Array<User>> {
+    return this.af.collection<User>('users').valueChanges();
   }
 }
