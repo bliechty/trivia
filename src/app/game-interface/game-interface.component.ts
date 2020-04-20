@@ -61,15 +61,23 @@ export class GameInterfaceComponent implements OnInit {
 	}
 	selectAnswer(answerId) {
 		this.selectable = false
-		console.log(answerId)
-		if (this.questions[this.count++]["correct_answer"] === this.currentQuestions["answers"][answerId]) {
-			console.log("CORRECT BRUH")
-			document.getElementById('answer' + answerId).classList.add("correct")
+		let correctId = ""
+		this.currentQuestions["answers"].forEach((v, i) => {
+			if (v === this.questions[this.count]["correct_answer"]) {
+				correctId = "answer" + i
+			}
+		})
+		document.getElementById(correctId).classList.add("correct")
+		if (this.currentQuestions["answers"][answerId] !== this.questions[this.count++]["correct_answer"]) {
+			console.log("WRONG BRUH")
+			document.getElementById('answer' + answerId).classList.add("incorrect")
 		}
 		else {
-			console.log("WRONG BRUH")
+			console.log("CORRECT BRUH")
 		}
 		setTimeout(() => {
+			document.getElementById(correctId).classList.remove("correct")
+			document.getElementById('answer' + answerId).classList.remove("incorrect")
 			if (this.count < this.questions.length) {
 				this.changeQuestion()
 			}
