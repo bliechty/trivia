@@ -9,8 +9,11 @@
           {{ firstName }} <mat-icon>arrow_drop_down</mat-icon>
         </button>
         <mat-menu #menu="matMenu" class="mat-toolbar mat-warn">
-          <button mat-menu-item (click)="logout()" id="logout">Logout</button>
           <button mat-menu-item routerLink="/userStats">Stats</button>
+          <button mat-menu-item (click)="logout()" id="logout">
+            Logout
+            <mat-icon>exit_to_app</mat-icon>
+          </button>
         </mat-menu>
       </div>
   </mat-toolbar-row>

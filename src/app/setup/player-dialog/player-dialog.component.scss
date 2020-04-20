@@ -1,12 +1,22 @@
-div {
+mat-dialog-content {
     display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
 }
 
 mat-card {
-    width: 100%;
+    width: 120px;
     background-color: #35b0ab;
     margin: 20px;
     text-align: center;
+}
+
+mat-card:hover {
+    cursor: pointer;
+}
+
+mat-card:active {
+    transform: translateY(4px) translateX(4px);
 }
 
 .mat-card-avatar {

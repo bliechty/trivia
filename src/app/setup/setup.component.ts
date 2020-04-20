@@ -18,7 +18,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SetupComponent implements OnInit {
   categories: Category[];
-  questions: Array<Result>;
+  data = {
+    questions: [],
+    users: []
+    }
+
+
 
   categoriesSubscription: Subscription;
 
@@ -67,15 +72,21 @@ export class SetupComponent implements OnInit {
   }
 
   chooseUser() {
-    console.log(this.setUpForm.value.amount)
     if (Number(this.setUpForm.value.amount) > 1) {
       const dialogRef = this.dialog.open(PlayerDialogComponent, {
-        width: '600px',
-        data: {}
+        width: '1000px',
+        disableClose: true,
+        data: { amount: this.setUpForm.value.amount }
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
+        if (result === "canceled") {
+          this.setUpForm.get('amount').setValue(1)
+        }
+        else {
+          this.data.users = result
+        }
+        console.log(result);
       });
     }
   }
@@ -95,10 +106,14 @@ export class SetupComponent implements OnInit {
       difficulty === "any" ? null : difficulty,
       type === "any" ? null : type
     ).subscribe(questions => {
-      this.questions = questions
-      if(this.questions.length !== 0) {
+      this.data.questions = questions
+      if (this.data.questions.length !== 0) {
+        if(Number(this.setUpForm.value.amount) === 1){
+          this.data.users = []
+        }
         this.router.navigate(['/game'])
-        this.sendData(this.questions)
+        this.sendData(this.data)
+        console.log(this.data)
       }
       else {
         this.snackBar.open("OOPS! There doesn't seem to be any questions matching your set up!", "Close", {
@@ -107,7 +122,7 @@ export class SetupComponent implements OnInit {
         })
       }
     });
-    
+
   }
 
 }
