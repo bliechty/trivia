@@ -60,6 +60,7 @@ export class GameInterfaceComponent implements OnInit {
 		}
 	}
 	selectAnswer(answerId) {
+		if (this.count >= this.questions.length) return
 		this.selectable = false
 		let correctId = ""
 		this.currentQuestions["answers"].forEach((v, i) => {
