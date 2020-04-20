@@ -45,7 +45,7 @@ export class GameInterfaceComponent implements OnInit {
 				this.changeQuestion()
 			}
 			else {
-				this.router.navigate(['/game'])
+				this.router.navigate(['/set-up'])
 			}
 		}
 	}
