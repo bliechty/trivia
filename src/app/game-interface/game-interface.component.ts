@@ -30,8 +30,8 @@ export class GameInterfaceComponent implements OnInit {
 		if (this.questions.length > 0) {
 			this.currentQuestions["question"] = this.questions[this.count]["question"]
 			this.currentQuestions["answers"] = this.questions[this.count]["incorrect_answers"].concat(this.questions[this.count]["correct_answer"])
-			console.log(this.currentQuestions["answers"])
 			if (this.currentQuestions["answers"].length > 2) {
+				// Randomize the questions
 				for (let i = this.currentQuestions["answers"].length - 1; i > 0; i--) {
 					let j = Math.floor(Math.random() * (i + 1))
 					let temp = this.currentQuestions["answers"][i]
