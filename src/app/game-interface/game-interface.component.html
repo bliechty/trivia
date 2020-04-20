@@ -7,7 +7,7 @@
 		</mat-card-header>
 	</mat-card>
 	<mat-card-actions>
-		<button mat-button *ngFor="let answer of currentQuestions['answers']" (click)="selectAnswer(answer)">
+		<button mat-button [disabled]="!selectable" *ngFor="let answer of currentQuestions['answers']" (click)="selectAnswer(answer)">
 			<span [innerHTML]="answer"></span>
 		</button>
 	</mat-card-actions>

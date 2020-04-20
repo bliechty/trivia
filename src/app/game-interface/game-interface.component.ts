@@ -9,6 +9,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 	styleUrls: ['./game-interface.component.scss']
 })
 export class GameInterfaceComponent implements OnInit {
+	delayTime: number = 2000
+	selectable: boolean = true
+	
 	currentQuestions = {
 		"question": "",
 		"answers": []
@@ -57,20 +60,24 @@ export class GameInterfaceComponent implements OnInit {
 		}
 	}
 	selectAnswer(answer) {
+		this.selectable = false
 		if (this.questions[this.count++]["correct_answer"] === answer) {
 			console.log("CORRECT BRUH")
 		}
 		else {
 			console.log("WRONG BRUH")
 		}
-		if (this.count < this.questions.length) {
-			this.changeQuestion()
-		}
-		else {
-			this.currentQuestions["question"] = "done"
-			this.currentQuestions["answers"] = ["done"]
-		}
-		
+		setTimeout(() => {
+			if (this.count < this.questions.length) {
+				this.changeQuestion()
+			}
+			else {
+				this.currentQuestions["question"] = "done"
+				this.currentQuestions["answers"] = ["done"]
+			}
+			this.selectable = true
+		}, this.delayTime)
+
 	}
 
 }

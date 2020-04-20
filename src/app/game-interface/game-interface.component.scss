@@ -13,8 +13,8 @@ mat-card, mat-card-actions {
 	margin-bottom: 50px;
 }
 
-button {
-	background-color: #fff;
-	color: #333;
+button, button:disabled {
+	background-color: #fff !important;
+	color: #333 !important;
 	margin: 3px !important;
 }
