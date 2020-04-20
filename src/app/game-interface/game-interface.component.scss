@@ -3,7 +3,30 @@ mat-card-header, mat-card-actions {
 	flex-direction: column;
 	text-align: center;
 }
+mat-card, mat-card-actions {
+	background-color: #888;
+}
 
-mat-card {
-	margin: 20px
+.game-title-card {
+	background-color: #fff;
+	color: #333;
+	margin-bottom: 50px;
+}
+
+button, button:disabled {
+	background-color: #fff !important;
+	color: #333 !important;
+	margin: 3px !important;
+}
+button.incorrect:disabled {
+	background-color: #c43c3c !important;
+	color: #fff !important;
+	transition: background-color 0.05s;
+	transition: color 0.2s;
+}
+button.correct:disabled {
+	background-color: #49a549 !important;
+	color: #fff !important;
+	transition: background-color 0.05s;
+	transition: color 0.2s;
 }
