@@ -40,7 +40,6 @@ export class GameInterfaceComponent implements OnInit {
 			}
 		}
 		else {
-			/*
 			this.questions = this.sendDataService.getGameData()
 			if (this.questions.length > 0) {
 				this.changeQuestion()
@@ -48,7 +47,6 @@ export class GameInterfaceComponent implements OnInit {
 			else {
 				this.router.navigate(['/game'])
 			}
-			*/
 		}
 	}
 	selectAnswer(answer) {
