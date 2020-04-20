@@ -8,8 +8,6 @@ import { SendDataService } from '../services/send-data.service';
 	styleUrls: ['./game-interface.component.scss']
 })
 export class GameInterfaceComponent implements OnInit {
-	subscription: Subscription;
-
 	currentQuestions = {
 		"question": "",
 		"answers": []
@@ -19,16 +17,7 @@ export class GameInterfaceComponent implements OnInit {
 	count: number = 0
 
 	constructor(private sendDataService: SendDataService) {
-		/*
-		this.subscription = this.sendDataService.getGameData().subscribe(newData => {
-			if (newData) {
-				this.data = newData;
-			} else {
-				this.data = [];
-			}
-			console.log(this.data)
-		});
-		*/
+		console.log(this.sendDataService.getGameData())
 		this.changeQuestion()
 	}
 	ngOnInit(): void {
