@@ -3,8 +3,8 @@
 
 <mat-dialog-content>
     <mat-card (click)="playerClicked(player, $event)" *ngFor="let player of players" >
-        <img mat-card-avatar [src]="player.photoURL">
-        <mat-card-title>{{player.displayName}}</mat-card-title>
+        <img mat-card-avatar [src]="player.photoURL ? player.photoURL : defaultAvatarURL">
+        <mat-card-title>{{ player.displayName ? player.displayName : getDefaultUsername(player.email) }}</mat-card-title>
     </mat-card>
 </mat-dialog-content>
 

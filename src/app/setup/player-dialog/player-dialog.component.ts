@@ -15,6 +15,8 @@ export class PlayerDialogComponent implements OnInit {
   isDisabled = false;
   chosenPlayers = 1;
 
+  defaultAvatarURL: string = 'https://i0.wp.com/www.mvhsoracle.com/wp-content/uploads/2018/08/default-avatar.jpg?ssl=1';
+
   constructor(
     public dialogRef: MatDialogRef<PlayerDialogComponent>,
     private authService: AuthService,
@@ -57,4 +59,7 @@ export class PlayerDialogComponent implements OnInit {
     this.dialogRef.close("canceled")
   }
 
+  getDefaultUsername(email: string): string {
+    return email.replace(/@.+/, '');
+  }
 }
