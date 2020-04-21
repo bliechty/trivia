@@ -1,18 +1,18 @@
 <div id="sign-in-container">
-  <mat-card id="sign-in-card">
+  <div>
+    <button mat-stroked-button class="active">Log In</button>
+    <button mat-stroked-button >Sign Up</button>
+  </div>
+
+  <mat-card id="sign-in-card" *ngIf="isSignIn">
     <mat-card-title>Sign In</mat-card-title>
     <mat-card-subtitle>To Start Playing</mat-card-subtitle>
     <mat-card-content id="sign-in-content">
       <form [formGroup]="signinForm">
         <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input
-            matInput
-            placeholder="email"
-            formControlName="signinEmail"
-            (ngModelChange)="resetSigninError()"
-            required
-          >
+          <mat-label>Enter your Email</mat-label>
+          <input matInput placeholder="email" formControlName="signinEmail" (ngModelChange)="resetSigninError()"
+            required>
         </mat-form-field>
 
         <div *ngIf="signinEmail.invalid && (signinEmail.dirty || signinEmail.touched || signinSubmit)">
@@ -26,18 +26,13 @@
         </div>
 
         <mat-form-field>
-          <mat-label>Password</mat-label>
-          <input
-            type="password"
-            matInput
-            placeholder="password"
-            formControlName="signinPassword"
-            (ngModelChange)="resetSigninError()"
-            required
-          >
+          <mat-label>Enter your Password</mat-label>
+          <input type="password" matInput placeholder="password" formControlName="signinPassword"
+            (ngModelChange)="resetSigninError()" required>
         </mat-form-field>
 
-        <mat-error *ngIf="signinPassword.errors?.required && (signinPassword.dirty || signinPassword.touched || signinSubmit)">
+        <mat-error
+          *ngIf="signinPassword.errors?.required && (signinPassword.dirty || signinPassword.touched || signinSubmit)">
           Password is required
         </mat-error>
 
@@ -46,7 +41,7 @@
         </mat-error>
 
         <div>
-          <button mat-raised-button class="mat-warn" (click)="signin()">Sign In</button>
+          <button mat-raised-button color="warn" (click)="signin()">Sign In</button>
         </div>
       </form>
 
@@ -64,21 +59,14 @@
     </mat-card-content>
   </mat-card>
 
-  <div id="or">OR</div>
-
-  <mat-card id="sign-up-card">
+  <mat-card id="sign-up-card" *ngIf="isSignUp">
     <mat-card-title>Sign Up</mat-card-title>
     <mat-card-content id="sign-up-content">
       <form [formGroup]="signupForm">
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input
-            matInput
-            placeholder="Ex. example@gmail.com"
-            formControlName="signupEmail"
-            (ngModelChange)="resetSignupError()"
-            required
-          >
+          <input matInput placeholder="Ex. example@gmail.com" formControlName="signupEmail"
+            (ngModelChange)="resetSignupError()" required>
         </mat-form-field>
 
         <div *ngIf="signupEmail.invalid && (signupEmail.dirty || signupEmail.touched || signupSubmit)">
@@ -93,17 +81,12 @@
 
         <mat-form-field>
           <mat-label>Password</mat-label>
-          <input
-            type="password" 
-            matInput
-            placeholder="Ex. password#@12"
-            formControlName="signupPassword"
-            (ngModelChange)="resetSignupError()"
-            required
-          >
+          <input type="password" matInput placeholder="Ex. password#@12" formControlName="signupPassword"
+            (ngModelChange)="resetSignupError()" required>
         </mat-form-field>
 
-        <mat-error *ngIf="signupPassword.errors?.required && (signupPassword.dirty || signupPassword.touched || signupSubmit)">
+        <mat-error
+          *ngIf="signupPassword.errors?.required && (signupPassword.dirty || signupPassword.touched || signupSubmit)">
           Password is required
         </mat-error>
 
@@ -112,7 +95,7 @@
         </mat-error>
 
         <div>
-          <button mat-raised-button class="mat-warn" (click)="signup()">Sign Up</button>
+          <button mat-raised-button class="mat-warn, #white" (click)="signup()">Create Account</button>
         </div>
       </form>
     </mat-card-content>
