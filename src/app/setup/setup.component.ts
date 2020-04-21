@@ -75,7 +75,7 @@ export class SetupComponent implements OnInit {
   }
 
   chooseUser() {
-    this.data.users = [this.authService.user]
+    this.data.users = []
     if (Number(this.setUpForm.value.amount) > 1) {
       const dialogRef = this.dialog.open(PlayerDialogComponent, {
         width: '1000px',
@@ -88,13 +88,14 @@ export class SetupComponent implements OnInit {
           this.setUpForm.get('amount').setValue(1)
         }
         else {
-          this.data.users.push(result)
+          this.data.users = result
         }
       });
     }
   }
 
   sendData(data) {
+    console.log(data)
     this.sendDataService.sendGameData(data);
   }
 

@@ -34,7 +34,8 @@ export class PlayerDialogComponent implements OnInit {
   playerClicked(player, event) {
 
     if (Number(this.data.amount) <= 2) {
-      this.dialogRef.close(player);
+      this.playersPlaying.push(player)
+      this.dialogRef.close(this.playersPlaying);
     } else {
       if (event.target.tagName === 'MAT-CARD') {
         // make players already chosen disabled
