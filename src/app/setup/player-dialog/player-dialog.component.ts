@@ -10,8 +10,10 @@ import { TriviaService } from 'src/app/services/trivia.service';
 })
 export class PlayerDialogComponent implements OnInit {
   players;
-  playersPlaying = [];
+  playersPlaying = [this.authService.user];
   nextPlayer = false;
+  isDisabled = false;
+  chosenPlayers = 1;
 
   constructor(
     public dialogRef: MatDialogRef<PlayerDialogComponent>,
@@ -21,7 +23,6 @@ export class PlayerDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data.amount)
     this.triviaService.getAllUsersObservable()
       .subscribe(players => {
         let filtered = players.filter(player => player.uid !== this.authService.user.uid)
@@ -30,18 +31,24 @@ export class PlayerDialogComponent implements OnInit {
       })
   }
 
-  playerClicked(player) {
+  playerClicked(player, event) {
+
     if (Number(this.data.amount) <= 2) {
       this.dialogRef.close(player);
     } else {
-      let filtered= this.players.filter(chosenPlayer => chosenPlayer.uid !== player.uid)
-      // this.players = filtered
-      console.log("make the players already chosen to be disabled")
-      this.nextPlayer = true
-      this.playersPlaying.push(player)
-      console.log("need to make it so you can add more than one player")
-      // this.dialogRef.close(this.playersPlaying)
-
+      if (event.target.tagName === 'MAT-CARD') {
+        // make players already chosen disabled
+        event.target.classList.add('disabled')
+      }
+      else {
+        event.target.parentNode.classList.add('disabled')
+      }
+        this.nextPlayer = true
+        this.playersPlaying.push(player)
+        this.chosenPlayers++
+        if (this.chosenPlayers === Number(this.data.amount)) {
+          this.dialogRef.close(this.playersPlaying)
+        }
     }
   }
 

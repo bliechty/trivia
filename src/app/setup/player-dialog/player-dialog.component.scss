@@ -19,6 +19,15 @@ mat-card:active {
     transform: translateY(4px) translateX(4px);
 }
 
+.disabled {
+    opacity: .3;
+    pointer-events: none;
+}
+
+.disabled:hover {
+    cursor: not-allowed;
+}
+
 .mat-card-avatar {
     height: 80px;
     width: 80px;
