@@ -1,15 +1,54 @@
-<mat-card>
-  <mat-card-title>Sign In</mat-card-title>
-  <mat-card-subtitle>To Start Playing</mat-card-subtitle>
-  <mat-card-content>
-    <button id='google' mat-raised-button (click)='signInWithGoogle()'>
-      <fa-icon [icon]='google'></fa-icon>
-      <span>Continue with Google</span>
-    </button>
+<div id="sign-in-container">
+  <mat-card>
+    <mat-card-title>Sign In</mat-card-title>
+    <mat-card-subtitle>To Start Playing</mat-card-subtitle>
+    <mat-card-content id="sign-in-content">
+      <form [formGroup]="form">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="email" formControlName="email">
+        </mat-form-field>
 
-    <button id='facebook' mat-raised-button (click)='signInWithFacebook()'>
-      <fa-icon [icon]='facebook'></fa-icon>
-      <span>Continue with Facebook</span>
-    </button>
-  </mat-card-content>
-</mat-card>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input type="password" matInput placeholder="password" formControlName="password">
+        </mat-form-field>
+
+        <div>
+          <button mat-raised-button class="mat-warn" (click)="signin()">Sign In</button>
+        </div>
+      </form>
+
+      <button id='google' mat-raised-button (click)='signInWithGoogle()'>
+        <fa-icon [icon]='google'></fa-icon>
+        <span>Continue with Google</span>
+      </button>
+
+      <button id='facebook' mat-raised-button (click)='signInWithFacebook()'>
+        <fa-icon [icon]='facebook'></fa-icon>
+        <span>Continue with Facebook</span>
+      </button>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>Sign Up</mat-card-title>
+    <mat-card-content id="sign-up-content">
+      <form [formGroup]="form">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Ex. example@gmail.com" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input type="password" matInput placeholder="password" formControlName="password">
+        </mat-form-field>
+
+        <div>
+          <button mat-raised-button class="mat-warn" (click)="signup()">Sign Up</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
