@@ -99,8 +99,20 @@ export class LoginComponent implements OnInit {
     this.signupError = '';
   }
 
-  signInOrSignUp() {
+  signInOrSignUp(indicator?: boolean) {
+    this.isSignIn = !this.isSignIn;
+    this.isSignUp = !this.isSignUp;
 
+    const signInList = document.getElementById('sign-in').classList;
+    const signUpList = document.getElementById('sign-up').classList;
+
+    if (indicator) {
+      signInList.add('active');
+      signUpList.remove('active');
+    } else {
+      signUpList.add('active');
+      signInList.remove('active');
+    }
   }
 
   get signinEmail(): AbstractControl { return this.signinForm.get('signinEmail'); }

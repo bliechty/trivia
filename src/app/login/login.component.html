@@ -1,7 +1,7 @@
 <div id="sign-in-container">
   <div>
-    <button mat-stroked-button class="active">Log In</button>
-    <button mat-stroked-button >Sign Up</button>
+    <button id="sign-in" mat-stroked-button class="active" (click)="signInOrSignUp(true)">Sign In</button>
+    <button id="sign-up" mat-stroked-button (click)="signInOrSignUp()">Sign Up</button>
   </div>
 
   <mat-card id="sign-in-card" *ngIf="isSignIn">
@@ -41,7 +41,7 @@
         </mat-error>
 
         <div>
-          <button mat-raised-button color="warn" (click)="signin()">Sign In</button>
+          <button mat-raised-button class="mat-warn" (click)="signin()">Sign In</button>
         </div>
       </form>
 
@@ -95,7 +95,7 @@
         </mat-error>
 
         <div>
-          <button mat-raised-button class="mat-warn, #white" (click)="signup()">Create Account</button>
+          <button mat-raised-button class="mat-warn" (click)="signup()">Create Account</button>
         </div>
       </form>
     </mat-card-content>
