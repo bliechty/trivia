@@ -6,7 +6,7 @@ import { Result } from '../interfaces/result';
   providedIn: 'root'
 })
 export class SendDataService {
-  data= [];
+  data: object = {};
 
   constructor() { }
 

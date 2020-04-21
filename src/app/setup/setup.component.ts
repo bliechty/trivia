@@ -10,6 +10,7 @@ import { PlayerDialogComponent } from './player-dialog/player-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Result } from '../interfaces/result';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-setup',
@@ -35,6 +36,7 @@ export class SetupComponent implements OnInit {
 
   constructor(
     private triviaService: TriviaService,
+    private authService: AuthService,
     private sendDataService: SendDataService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
@@ -72,6 +74,7 @@ export class SetupComponent implements OnInit {
   }
 
   chooseUser() {
+    this.data.users = [this.authService.user]
     if (Number(this.setUpForm.value.amount) > 1) {
       const dialogRef = this.dialog.open(PlayerDialogComponent, {
         width: '1000px',
@@ -84,7 +87,7 @@ export class SetupComponent implements OnInit {
           this.setUpForm.get('amount').setValue(1)
         }
         else {
-          this.data.users = result
+          this.data.users.push(result)
         }
         console.log(result);
       });
@@ -109,7 +112,7 @@ export class SetupComponent implements OnInit {
       this.data.questions = questions
       if (this.data.questions.length !== 0) {
         if(Number(this.setUpForm.value.amount) === 1){
-          this.data.users = []
+          this.data.users = [this.authService.user]
         }
         this.router.navigate(['/game'])
         this.sendData(this.data)
