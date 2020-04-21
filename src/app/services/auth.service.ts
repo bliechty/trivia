@@ -6,7 +6,7 @@ import { auth } from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../interfaces/user';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +16,8 @@ export class AuthService {
 
   loggedInChange: Subject<boolean> = new Subject<boolean>();
   firstNameChange: Subject<string> = new Subject<string>();
+  signinErrorChange: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  signupErrorChange: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(
     private af: AngularFirestore,
@@ -70,7 +72,9 @@ export class AuthService {
       })
       .catch(e => {
         console.log('Error with signing up:');
-        console.log(e);
+        console.log(e.message);
+
+        this.signupErrorChange.next(e.message);
       });
   }
 
@@ -80,8 +84,10 @@ export class AuthService {
         console.log("Successfully signed in using email and password");
       })
       .catch(e => {
-        console.log('Error with signing in with email and password');
-        console.log(e);
+        console.log('Error with signing in with email and password:');
+        console.log(e.message);
+
+        this.signinErrorChange.next(e.message);
       });
   }
 }

@@ -1,18 +1,49 @@
 <div id="sign-in-container">
-  <mat-card>
+  <mat-card id="sign-in-card">
     <mat-card-title>Sign In</mat-card-title>
     <mat-card-subtitle>To Start Playing</mat-card-subtitle>
     <mat-card-content id="sign-in-content">
-      <form [formGroup]="form">
+      <form [formGroup]="signinForm">
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput placeholder="email" formControlName="email">
+          <input
+            matInput
+            placeholder="email"
+            formControlName="signinEmail"
+            (ngModelChange)="resetSigninError()"
+            required
+          >
         </mat-form-field>
+
+        <div *ngIf="signinEmail.invalid && (signinEmail.dirty || signinEmail.touched || signinSubmit)">
+          <mat-error *ngIf="signinEmail.errors.required">
+            Email is required
+          </mat-error>
+
+          <mat-error *ngIf="signinEmail.errors.pattern">
+            Email is invalid
+          </mat-error>
+        </div>
 
         <mat-form-field>
           <mat-label>Password</mat-label>
-          <input type="password" matInput placeholder="password" formControlName="password">
+          <input
+            type="password"
+            matInput
+            placeholder="password"
+            formControlName="signinPassword"
+            (ngModelChange)="resetSigninError()"
+            required
+          >
         </mat-form-field>
+
+        <mat-error *ngIf="signinPassword.errors?.required && (signinPassword.dirty || signinPassword.touched || signinSubmit)">
+          Password is required
+        </mat-error>
+
+        <mat-error *ngIf="signinError && signinForm.valid">
+          {{ signinError }}
+        </mat-error>
 
         <div>
           <button mat-raised-button class="mat-warn" (click)="signin()">Sign In</button>
@@ -33,19 +64,52 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card>
+  <div id="or">OR</div>
+
+  <mat-card id="sign-up-card">
     <mat-card-title>Sign Up</mat-card-title>
     <mat-card-content id="sign-up-content">
-      <form [formGroup]="form">
+      <form [formGroup]="signupForm">
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput placeholder="Ex. example@gmail.com" formControlName="email">
+          <input
+            matInput
+            placeholder="Ex. example@gmail.com"
+            formControlName="signupEmail"
+            (ngModelChange)="resetSignupError()"
+            required
+          >
         </mat-form-field>
+
+        <div *ngIf="signupEmail.invalid && (signupEmail.dirty || signupEmail.touched || signupSubmit)">
+          <mat-error *ngIf="signupEmail.errors.required">
+            Email is required
+          </mat-error>
+
+          <mat-error *ngIf="signupEmail.errors.pattern">
+            Email is invalid
+          </mat-error>
+        </div>
 
         <mat-form-field>
           <mat-label>Password</mat-label>
-          <input type="password" matInput placeholder="password" formControlName="password">
+          <input
+            type="password" 
+            matInput
+            placeholder="Ex. password#@12"
+            formControlName="signupPassword"
+            (ngModelChange)="resetSignupError()"
+            required
+          >
         </mat-form-field>
+
+        <mat-error *ngIf="signupPassword.errors?.required && (signupPassword.dirty || signupPassword.touched || signupSubmit)">
+          Password is required
+        </mat-error>
+
+        <mat-error *ngIf="signupError && signupForm.valid">
+          {{ signupError }}
+        </mat-error>
 
         <div>
           <button mat-raised-button class="mat-warn" (click)="signup()">Sign Up</button>

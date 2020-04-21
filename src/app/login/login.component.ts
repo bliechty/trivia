@@ -4,7 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons/faGoogle';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons/faFacebook';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,16 @@ export class LoginComponent implements OnInit {
   google = faGoogle;
   facebook = faFacebook;
 
-  form: FormGroup;
+  signinForm: FormGroup;
+  signupForm: FormGroup;
+
+  signinError: string;
+  signupError: string;
+
+  signinSubmit: boolean = false;
+  signupSubmit: boolean = false;
+
+  emailRegex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   constructor(
     private authService: AuthService,
@@ -24,9 +33,28 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      email: [''],
-      password: ['']
+    this.signinForm = this.fb.group({
+      signinEmail: new FormControl('', [
+        Validators.required,
+        Validators.pattern(this.emailRegex)
+      ]),
+      signinPassword: new FormControl('', [Validators.required])
+    });
+
+    this.signupForm = this.fb.group({
+      signupEmail: new FormControl('', [
+        Validators.required,
+        Validators.pattern(this.emailRegex)
+      ]),
+      signupPassword: new FormControl('', [Validators.required])
+    });
+
+    this.authService.signinErrorChange.subscribe(error => {
+      this.signinError = error;
+    });
+
+    this.authService.signupErrorChange.subscribe(error => {
+      this.signupError = error;
     });
 
     this.authService.loggedInChange.subscribe(bool => {
@@ -45,10 +73,34 @@ export class LoginComponent implements OnInit {
   }
 
   signup(): void {
-    this.authService.signup(this.form.value.email, this.form.value.password);
+    if (this.signupForm.valid) {
+      this.authService.signup(this.signupForm.value.signupEmail, this.signupForm.value.signupPassword);
+    }
+
+    this.signupSubmit = true;
   }
 
   signin(): void {
-    this.authService.signin(this.form.value.email, this.form.value.password);
+    if (this.signinForm.valid) {
+      this.authService.signin(this.signinForm.value.signinEmail, this.signinForm.value.signinPassword);
+    }
+
+    this.signinSubmit = true;
   }
+
+  resetSigninError(): void {
+    this.signinError = '';
+  }
+
+  resetSignupError(): void {
+    this.signupError = '';
+  }
+
+  get signinEmail(): AbstractControl { return this.signinForm.get('signinEmail'); }
+
+  get signinPassword(): AbstractControl { return this.signinForm.get('signinPassword'); }
+
+  get signupEmail(): AbstractControl { return this.signupForm.get('signupEmail'); }
+
+  get signupPassword(): AbstractControl { return this.signupForm.get('signupPassword'); }
 }
