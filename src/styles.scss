@@ -206,8 +206,8 @@ $mat-warn: (
   darker: #e43c4e,
   200: #ec576b, // For slide toggle,
   contrast : (
-    main: $dark-primary-text,
-    lighter: $dark-primary-text,
+    main: $light-primary-text,
+    lighter: $light-primary-text,
     darker: $light-primary-text,
   )
 );

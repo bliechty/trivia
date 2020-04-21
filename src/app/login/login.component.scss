@@ -25,7 +25,6 @@ mat-card {
 
 button {
   margin: 20px;
-  color: #ffffff !important;
 }
 
 // #sign-up-content {
@@ -34,6 +33,7 @@ button {
 
 #sign-in-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -47,8 +47,14 @@ button {
   font-size: 20px;
 }
 
-@media only screen and (max-width: 800px) {
-  #sign-in-container {
-    flex-direction: column;
-  }
+// @media only screen and (max-width: 800px) {
+//   #sign-in-container {
+//     flex-direction: column;
+//   }
+// }
+
+.active {
+  color: #ec576b;
+  border-bottom-color: #ec576b;
+  pointer-events: none;
 }

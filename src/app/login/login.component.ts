@@ -24,6 +24,9 @@ export class LoginComponent implements OnInit {
   signinSubmit: boolean = false;
   signupSubmit: boolean = false;
 
+  isSignIn: boolean = true;
+  isSignUp: boolean = false;
+
   emailRegex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   constructor(
@@ -94,6 +97,10 @@ export class LoginComponent implements OnInit {
 
   resetSignupError(): void {
     this.signupError = '';
+  }
+
+  signInOrSignUp() {
+
   }
 
   get signinEmail(): AbstractControl { return this.signinForm.get('signinEmail'); }
