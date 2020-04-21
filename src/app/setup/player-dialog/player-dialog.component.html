@@ -2,7 +2,7 @@
 <mat-card-subtitle *ngIf="nextPlayer">Choose player {{data.amount}}</mat-card-subtitle>
 
 <mat-dialog-content>
-    <mat-card (click)="playerClicked(player)" *ngFor="let player of players">
+    <mat-card (click)="playerClicked(player, $event)" *ngFor="let player of players" >
         <img mat-card-avatar [src]="player.photoURL">
         <mat-card-title>{{player.displayName}}</mat-card-title>
     </mat-card>

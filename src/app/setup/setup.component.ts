@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Result } from '../interfaces/result';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
+import { Data } from '../interfaces/data';
 
 @Component({
   selector: 'app-setup',
@@ -19,7 +20,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class SetupComponent implements OnInit {
   categories: Category[];
-  data = {
+  data: Data = {
     questions: [],
     users: []
     }
@@ -89,13 +90,12 @@ export class SetupComponent implements OnInit {
         else {
           this.data.users.push(result)
         }
-        console.log(result);
       });
     }
   }
 
-  sendData(dataArray) {
-    this.sendDataService.sendGameData(dataArray);
+  sendData(data) {
+    this.sendDataService.sendGameData(data);
   }
 
   submitForm() {
@@ -116,7 +116,6 @@ export class SetupComponent implements OnInit {
         }
         this.router.navigate(['/game'])
         this.sendData(this.data)
-        console.log(this.data)
       }
       else {
         this.snackBar.open("OOPS! There doesn't seem to be any questions matching your set up!", "Close", {

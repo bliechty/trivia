@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { Result } from '../interfaces/result';
+import { Data } from '../interfaces/data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SendDataService {
-  data: object = {};
+  data: Data = {
+    users: [],
+    questions: []
+  };
 
   constructor() { }
 
-  sendGameData(game: any[]) {
+  sendGameData(game: Data) {
     this.data = game
   }
 
