@@ -51,7 +51,7 @@ export class TriviaService {
     return this.af.collection<User>('users').valueChanges();
   }
 
-  getUserByIdObservable(): Observable<User> {
+  getCurrentUserObservable(): Observable<User> {
     return this.af.collection('users').doc<User>(this.authService.user.uid).valueChanges();
   }
 }

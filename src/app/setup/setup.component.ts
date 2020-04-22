@@ -10,6 +10,7 @@ import { PlayerDialogComponent } from './player-dialog/player-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Result } from '../interfaces/result';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../services/auth.service';
 import { Data } from '../interfaces/data';
 
 @Component({
@@ -36,6 +37,7 @@ export class SetupComponent implements OnInit {
 
   constructor(
     private triviaService: TriviaService,
+    private authService: AuthService,
     private sendDataService: SendDataService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
@@ -73,6 +75,7 @@ export class SetupComponent implements OnInit {
   }
 
   chooseUser() {
+    this.data.users = []
     if (Number(this.setUpForm.value.amount) > 1) {
       const dialogRef = this.dialog.open(PlayerDialogComponent, {
         width: '1000px',
@@ -87,12 +90,12 @@ export class SetupComponent implements OnInit {
         else {
           this.data.users = result
         }
-        console.log(result);
       });
     }
   }
 
   sendData(data) {
+    console.log(data)
     this.sendDataService.sendGameData(data);
   }
 
@@ -110,11 +113,10 @@ export class SetupComponent implements OnInit {
       this.data.questions = questions
       if (this.data.questions.length !== 0) {
         if(Number(this.setUpForm.value.amount) === 1){
-          this.data.users = []
+          this.data.users = [this.authService.user]
         }
         this.router.navigate(['/game'])
         this.sendData(this.data)
-        console.log(this.data)
       }
       else {
         this.snackBar.open("OOPS! There doesn't seem to be any questions matching your set up!", "Close", {
