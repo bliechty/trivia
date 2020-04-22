@@ -17,7 +17,6 @@ export class TriviaService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
     private af: AngularFirestore
   ) { }
 
@@ -51,7 +50,7 @@ export class TriviaService {
     return this.af.collection<User>('users').valueChanges();
   }
 
-  getCurrentUserObservable(): Observable<User> {
-    return this.af.collection('users').doc<User>(this.authService.user.uid).valueChanges();
+  getCurrentUserObservable(id: string): Observable<User> {
+    return this.af.collection('users').doc<User>(id).valueChanges();
   }
 }
