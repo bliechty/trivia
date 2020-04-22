@@ -20,6 +20,7 @@ import { Data } from '../interfaces/data';
 })
 export class SetupComponent implements OnInit {
   categories: Category[];
+  currentUser:any;
   data: Data = {
     questions: [],
     users: []
@@ -46,6 +47,7 @@ export class SetupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // this.getCurrentUser()
     this.categories = this.route.snapshot.data.categories
     this.setUpForm = new FormGroup({
       'amount': new FormControl(this.game.amount),
@@ -92,6 +94,11 @@ export class SetupComponent implements OnInit {
         }
       });
     }
+  }
+
+  getCurrentUser() {
+    this.currentUser = this.triviaService.getCurrentUserObservable()
+    console.log(this.currentUser)
   }
 
   sendData(data) {
