@@ -66,7 +66,9 @@
                     <option value="multiple">Mutiple Choice</option>
                 </select>
             </mat-form-field>
-            <button mat-raised-button color="primary" type="submit" [disabled]="setUpForm.invalid">Let's Play!</button>
+            <div id="button-container">
+              <button mat-raised-button color="primary" type="submit" [disabled]="setUpForm.invalid">Let's Play!</button>
+            </div>
         </form>
     </mat-card-content>
 </mat-card>
