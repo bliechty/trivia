@@ -1,18 +1,20 @@
-<mat-card>
+<mat-card *ngIf="player$ | async as player">
   <mat-card-title>User Stats</mat-card-title>
   <mat-card-content>
 
     <mat-list>
       <mat-card-subtitle>User Information</mat-card-subtitle>
-      <mat-list-item>Display Name: </mat-list-item>
-      <mat-list-item>Provider Id: </mat-list-item>
-      <mat-list-item>Email: </mat-list-item>
-      <mat-list-item>Phone Number: </mat-list-item>
+      <mat-list-item>UID: {{player.uid}}</mat-list-item>
+      <mat-list-item>Display Name: {{player.displayName}}</mat-list-item>
+      <mat-list-item>Provider Id: {{player.providerId}}</mat-list-item>
+      <mat-list-item>Email: {{player.email}}</mat-list-item>
+      <mat-list-item>Phone Number: {{player.phoneNumber}}</mat-list-item>
     </mat-list>
-
+    <mat-divider [inset]="true"></mat-divider>
     <mat-list>
       <mat-card-subtitle>Game Stats</mat-card-subtitle>
       <mat-list-item>Number of Games Played: </mat-list-item>
+      <mat-progress-bar mode="determinate" value="40" color="accent"></mat-progress-bar>
       <mat-list-item>Number of Games Won: </mat-list-item>
       <mat-list-item>Number of Games Lost: </mat-list-item>
       <mat-list-item>Number of Questions Answered: </mat-list-item>

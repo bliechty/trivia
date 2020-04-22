@@ -13,8 +13,8 @@ export class UserStatsComponent implements OnInit {
 
   public player$: Observable<User>;
 
-  constructor(private db: AngularFirestore) {
-    this.player$ = this.db.doc<User>('').valueChanges();
+  constructor(private triviaService: TriviaService) {
+    this.player$ = this.triviaService.getUserByIdObservable();
    }
 
   ngOnInit(): void {

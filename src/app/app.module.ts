@@ -11,7 +11,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,12 +23,15 @@ import { environment } from 'src/environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { SameAmountValidatortDirective } from './setup/same-amount.directive';
 import { PlayerDialogComponent } from './setup/player-dialog/player-dialog.component';
 import { GameInterfaceComponent } from './game-interface/game-interface.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -54,8 +56,10 @@ import { UserStatsComponent } from './user-stats/user-stats.component';
     MatCardModule,
     MatDialogModule,
     MatListModule,
-    MatProgressSpinnerModule,
+    MatDividerModule,
     MatSnackBarModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
     HttpClientModule,
     MatMenuModule,
     MatIconModule,
@@ -63,8 +67,7 @@ import { UserStatsComponent } from './user-stats/user-stats.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     FontAwesomeModule,
-    MatToolbarModule,
-    HttpClientModule
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
