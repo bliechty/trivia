@@ -47,7 +47,7 @@ export class SetupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.getCurrentUser()
+    this.getCurrentUser()
     this.categories = this.route.snapshot.data.categories
     this.setUpForm = new FormGroup({
       'amount': new FormControl(this.game.amount),
@@ -82,7 +82,7 @@ export class SetupComponent implements OnInit {
       const dialogRef = this.dialog.open(PlayerDialogComponent, {
         width: '1000px',
         disableClose: true,
-        data: { amount: this.setUpForm.value.amount }
+        data: { amount: this.setUpForm.value.amount, currentUser: this.currentUser }
       });
 
       dialogRef.afterClosed().subscribe(result => {
@@ -97,8 +97,11 @@ export class SetupComponent implements OnInit {
   }
 
   getCurrentUser() {
-    this.currentUser = this.triviaService.getCurrentUserObservable()
-    console.log(this.currentUser)
+    this.authService.userIdChange.subscribe(id => {
+      if(id !== '') {
+      this.triviaService.getCurrentUserObservable(id).subscribe(user => this.currentUser = user)
+      }
+    })
   }
 
   sendData(data) {
@@ -120,7 +123,7 @@ export class SetupComponent implements OnInit {
       this.data.questions = questions
       if (this.data.questions.length !== 0) {
         if(Number(this.setUpForm.value.amount) === 1){
-          this.data.users = [this.authService.user]
+          this.data.users = [this.currentUser]
         }
         this.router.navigate(['/game'])
         this.sendData(this.data)

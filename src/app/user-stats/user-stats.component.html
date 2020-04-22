@@ -1,23 +1,46 @@
-<mat-card *ngIf="player$ | async as player">
-  <mat-card-title>User Stats</mat-card-title>
-  <mat-card-content>
+<div>
+  <mat-card *ngIf="player" class="mat-toolbar mat-warn">
+    <mat-card-title *ngIf="player.email || player.displayName">{{ player.displayName ? player.displayName : getDefaultUsername(player.email) }}</mat-card-title>
+  
+    <mat-card-content class="main">
+      <img [src]="player.photoURL ? player.photoURL : defaultAvatarURL">
+      <mat-list>
+        <mat-list-item *ngIf="player.email">
+          <mat-card-subtitle>
+          {{ player.email }}
+        </mat-card-subtitle>
+        </mat-list-item>
+        <mat-list-item *ngIf="player.phoneNumber">
+          <mat-card-subtitle>{{ player.phoneNumber }}</mat-card-subtitle>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+  
+  <mat-card>
+    <mat-card-content>
+      <mat-list>
+        <mat-card-title>Game Stats</mat-card-title>
+        <mat-list-item>Games Played: {{ player.totalGamesPlayed }}</mat-list-item>
+        <!-- <mat-progress-bar mode="determinate" value="40" color="accent"></mat-progress-bar> -->
+        <mat-list-item>Games Won: {{ player.totalGamesWon }}</mat-list-item>
+        <mat-list-item>Games Lost: {{ player.totalGamesLost }}</mat-list-item>
+        <mat-list-item>Questions Answered: {{ player.totalQuestionsAnswered }}</mat-list-item>
+        <mat-list-item>Answered Correctly: {{ player.totalQuestionsAnsweredCorrectly }}</mat-list-item>
+        <mat-list-item>Answered Incorrectly: {{ player.totalQuestionsAnsweredIncorrectly }}</mat-list-item>
+        <mat-list-item>Best Category(s):</mat-list-item>
+        <mat-list-item *ngFor="let category of bestCategories; let i = index">
+          <mat-card-subtitle>{{ i + 1 }}. {{ category }}</mat-card-subtitle>
+        </mat-list-item>
+        <mat-list-item>Worst Category(s):</mat-list-item>
+        <mat-list-item *ngFor="let category of worstCategories; let i = index">
+          <mat-card-subtitle>{{ i + 1 }}. {{ category }}</mat-card-subtitle>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>
 
-    <mat-list>
-      <mat-card-subtitle>User Information</mat-card-subtitle>
-      <mat-list-item>UID: {{player.uid}}</mat-list-item>
-      <mat-list-item>Display Name: {{player.displayName}}</mat-list-item>
-      <mat-list-item>Provider Id: {{player.providerId}}</mat-list-item>
-      <mat-list-item>Email: {{player.email}}</mat-list-item>
-      <mat-list-item>Phone Number: {{player.phoneNumber}}</mat-list-item>
-    </mat-list>
-    <mat-divider [inset]="true"></mat-divider>
-    <mat-list>
-      <mat-card-subtitle>Game Stats</mat-card-subtitle>
-      <mat-list-item>Number of Games Played: </mat-list-item>
-      <mat-progress-bar mode="determinate" value="40" color="accent"></mat-progress-bar>
-      <mat-list-item>Number of Games Won: </mat-list-item>
-      <mat-list-item>Number of Games Lost: </mat-list-item>
-      <mat-list-item>Number of Questions Answered: </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+<div id="spinner">
+  <mat-spinner *ngIf="!player"></mat-spinner>
+</div>

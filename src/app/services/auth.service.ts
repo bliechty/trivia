@@ -19,6 +19,8 @@ export class AuthService {
   signinErrorChange: BehaviorSubject<string> = new BehaviorSubject<string>('');
   signupErrorChange: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
+  userIdChange: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
   constructor(
     private af: AngularFirestore,
     private afa: AngularFireAuth,
@@ -36,13 +38,23 @@ export class AuthService {
           displayName = email.replace(/@.+/, '');
         }
 
+        this.userIdChange.next(this.user.uid);
         this.loggedInChange.next(true);
         this.firstNameChange.next(displayName);
 
         const usersRef = this.af.collection('users').doc(this.user.uid);
 
         usersRef.update({...this.user}).catch(_ => {
-          usersRef.set({...this.user});
+          usersRef.set({
+            ...this.user,
+            totalGamesPlayed: 0,
+            totalGamesWon: 0,
+            totalGamesLost: 0,
+            totalQuestionsAnswered: 0,
+            totalQuestionsAnsweredIncorrectly: 0,
+            totalQuestionsAnsweredCorrectly: 0,
+            categoryAnswers: []
+          });
         });
       }
     });
