@@ -35,7 +35,7 @@ export class UserStatsComponent implements OnInit {
           let cLR: string[] = [];
 
           for (let cA of user.categoryAnswers) {
-            if (cH === 0 || cL === 0) {
+            if (cA.answeredCorrectly === 0 && cA.answeredIncorrectly === 0) {
               break;
             }
 
