@@ -53,4 +53,12 @@ export class TriviaService {
   getCurrentUserObservable(id: string): Observable<User> {
     return this.af.collection('users').doc<User>(id).valueChanges();
   }
+
+  updateUserStats(users: User[]): void {
+    for (let user of users) {
+      this.af.collection('users').doc(user.uid).update({
+        ...user
+      });
+    }
+  }
 }

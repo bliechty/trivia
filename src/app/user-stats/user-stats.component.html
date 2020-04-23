@@ -1,32 +1,81 @@
-<mat-card *ngIf="player">
-  <mat-card-title>User Stats</mat-card-title>
-  <mat-card-content>
-    <mat-list>
-      <mat-card-subtitle>User Information</mat-card-subtitle>
-      <mat-list-item *ngIf="player.email || player.displayName">
-        Display Name: {{ player.displayName ? player.displayName : getDefaultUsername(player.email) }}
-      </mat-list-item>
-      <mat-list-item *ngIf="player.providerId">Provider Id: {{ player.providerId }}</mat-list-item>
-      <mat-list-item *ngIf="player.email">Email: {{ player.email }}</mat-list-item>
-      <mat-list-item *ngIf="player.phoneNumber">Phone Number: {{ player.phoneNumber }}</mat-list-item>
-    </mat-list>
-    <mat-divider [inset]="true"></mat-divider>
-    <mat-list>
-      <mat-card-subtitle>Game Stats</mat-card-subtitle>
-      <mat-list-item>Number of Games Played: {{ player.totalGamesPlayed }}</mat-list-item>
-      <!-- <mat-progress-bar mode="determinate" value="40" color="accent"></mat-progress-bar> -->
-      <mat-list-item>Number of Games Won: {{ player.totalGamesWon }}</mat-list-item>
-      <mat-list-item>Number of Games Lost: {{ player.totalGamesLost }}</mat-list-item>
-      <mat-list-item>Number of Questions Answered: {{ player.totalQuestionsAnswered }}</mat-list-item>
-      <mat-list-item>Number of Questions Answered Correctly: {{ player.totalQuestionsAnsweredCorrectly }}</mat-list-item>
-      <mat-list-item>Number of Questions Answered Incorrectly: {{ player.totalQuestionsAnsweredIncorrectly }}</mat-list-item>
-      <mat-list-item>Best Category/Categories:</mat-list-item>
-      <mat-list-item *ngFor="let category of bestCategories; let i = index">{{ i + 1 }}. {{ category }}</mat-list-item>
-      <mat-list-item>Worst Category/Categories:</mat-list-item>
-      <mat-list-item *ngFor="let category of worstCategories; let i = index">{{ i + 1 }}. {{ category }}</mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+<div>
+  <mat-card *ngIf="player" class="mat-toolbar mat-warn">
+    <mat-card-title *ngIf="player.email || player.displayName">{{ player.displayName ? player.displayName : getDefaultUsername(player.email) }}</mat-card-title>
+  
+    <mat-card-content class="main">
+      <img [src]="player.photoURL ? player.photoURL : defaultAvatarURL">
+      <mat-list>
+        <mat-list-item *ngIf="player.email">
+          <mat-card-subtitle>
+          {{ player.email }}
+        </mat-card-subtitle>
+        </mat-list-item>
+        <mat-list-item *ngIf="player.phoneNumber">
+          <mat-card-subtitle>{{ player.phoneNumber }}</mat-card-subtitle>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+  
+  <mat-card *ngIf="player">
+    <mat-card-title>Game Stats</mat-card-title>
+    <mat-card-content>
+     <div class="statRow">
+        <p colspan="2">Total Games Played:</p>
+        <p>{{ player.totalGamesPlayed }}</p>
+      </div>
+      <div class="statRow">
+        <p colspan="2">Games Won:</p>
+        <p>{{ player.totalGamesWon }}</p>
+      </div>
+      <div class="statRow">
+        <p colspan="2">Games Lost:</p>
+        <p>{{ player.totalGamesLost }}</p>
+      </div>
+      <div class="statRow">
+        <p colspan="2">Questions Answered:</p>
+        <p>{{ player.totalQuestionsAnswered }}</p>
+      </div>
+      <div class="statRow">
+        <p colspan="2">Answered Correctly:</p>
+        <p>{{ player.totalQuestionsAnsweredCorrectly }}</p>
+      </div>
+      <div class="statRow">
+        <p colspan="2">Questions Incorrectly:</p>
+        <p>{{ player.totalQuestionsAnsweredIncorrectly }}</p>
+      </div>
+
+      <mat-expansion-panel class="mat-toolbar mat-accent">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Best Category(s):</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ol>
+          <li *ngFor="let category of bestCategories">{{ category }}</li>
+        </ol>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel class="mat-toolbar mat-warn">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Worst Category(s):</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ol>
+          <li *ngFor="let category of worstCategories">{{ category }}</li>
+        </ol>
+      </mat-expansion-panel>
+ 
+      <!-- <mat-list>
+        <mat-list-item>Best Category(s):</mat-list-item>
+        <mat-list-item *ngFor="let category of bestCategories; let i = index">
+          <mat-card-subtitle>{{ i + 1 }}. {{ category }}</mat-card-subtitle>
+        </mat-list-item>
+        <mat-list-item>Worst Category(s):</mat-list-item>
+        <mat-list-item *ngFor="let category of worstCategories; let i = index">
+          <mat-card-subtitle>{{ i + 1 }}. {{ category }}</mat-card-subtitle>
+        </mat-list-item>
+      </mat-list> -->
+    </mat-card-content>
+  </mat-card>
+</div>
 
 <div id="spinner">
   <mat-spinner *ngIf="!player"></mat-spinner>
