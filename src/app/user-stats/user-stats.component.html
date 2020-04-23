@@ -1,5 +1,5 @@
 <div>
-  <mat-card *ngIf="player" class="mat-toolbar mat-warn">
+  <mat-card *ngIf="player" class="mat-toolbar mat-warn" id="user">
     <mat-card-title *ngIf="player.email || player.displayName">{{ player.displayName ? player.displayName : getDefaultUsername(player.email) }}</mat-card-title>
   
     <mat-card-content class="main">
@@ -41,7 +41,7 @@
         <p>{{ player.totalQuestionsAnsweredCorrectly }}</p>
       </div>
       <div class="statRow">
-        <p colspan="2">Questions Incorrectly:</p>
+        <p colspan="2">Answered Incorrectly:</p>
         <p>{{ player.totalQuestionsAnsweredIncorrectly }}</p>
       </div>
 

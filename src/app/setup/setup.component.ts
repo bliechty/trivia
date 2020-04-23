@@ -12,6 +12,7 @@ import { Result } from '../interfaces/result';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
 import { Data } from '../interfaces/data';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'app-setup',
@@ -20,7 +21,7 @@ import { Data } from '../interfaces/data';
 })
 export class SetupComponent implements OnInit {
   categories: Category[];
-  currentUser:any;
+  currentUser: User;
   data: Data = {
     questions: [],
     users: []
