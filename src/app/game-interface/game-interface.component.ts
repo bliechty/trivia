@@ -21,21 +21,24 @@ export class GameInterfaceComponent implements OnInit {
 	}
 	users: User[] = []
 	questions: Result[] = []
+	score: number[] = []
 	count: number = 0
 
 	constructor(
 		private sendDataService: SendDataService,
 		private router: Router
-	){
+	){ }
+	ngOnInit(): void {
 		this.updateData()
 		this.changeQuestion()
-	}
-	ngOnInit(): void {
 	}
 	updateData() {
 		let dataObject: Data = this.sendDataService.getGameData()
 		this.questions = dataObject["questions"]
 		this.users = dataObject["users"]
+		this.users.forEach(() => {
+			this.score.push(0)
+		})
 	}
 	changeQuestion() {
 		if (this.questions.length > 0) {
@@ -78,11 +81,11 @@ export class GameInterfaceComponent implements OnInit {
 		})
 		document.getElementById(correctId).classList.add("correct")
 		if (this.currentQuestions["answers"][answerId] !== this.questions[this.count++]["correct_answer"]) {
-			console.log("WRONG BRUH")
+			console.log("Incorrect")
 			document.getElementById('answer' + answerId).classList.add("incorrect")
 		}
 		else {
-			console.log("CORRECT BRUH")
+			console.log("Correct")
 		}
 		setTimeout(() => {
 			document.getElementById(correctId).classList.remove("correct")
