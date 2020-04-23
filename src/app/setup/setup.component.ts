@@ -105,7 +105,6 @@ export class SetupComponent implements OnInit {
   }
 
   sendData(data) {
-    console.log(data)
     this.sendDataService.sendGameData(data);
   }
 
