@@ -4,6 +4,7 @@ import { SendDataService } from '../services/send-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Result } from '../interfaces/result';
 import { Data } from '../interfaces/data';
+import { User } from '../interfaces/user';
 
 @Component({
 	selector: 'app-game-interface',
@@ -18,7 +19,7 @@ export class GameInterfaceComponent implements OnInit {
 		"question": "",
 		"answers": []
 	}
-	users: string[] = []
+	users: User[] = []
 	questions: Result[] = []
 	count: number = 0
 
@@ -26,11 +27,15 @@ export class GameInterfaceComponent implements OnInit {
 		private sendDataService: SendDataService,
 		private router: Router
 	){
-		let dataObject: Data = this.sendDataService.getGameData()
-		this.questions = dataObject["questions"]
+		this.updateData()
 		this.changeQuestion()
 	}
 	ngOnInit(): void {
+	}
+	updateData() {
+		let dataObject: Data = this.sendDataService.getGameData()
+		this.questions = dataObject["questions"]
+		this.users = dataObject["users"]
 	}
 	changeQuestion() {
 		if (this.questions.length > 0) {
@@ -53,8 +58,7 @@ export class GameInterfaceComponent implements OnInit {
 			}
 		}
 		else {
-			let dataObject: Data = this.sendDataService.getGameData()
-			this.questions = dataObject["questions"]
+			this.updateData()
 			if (this.questions.length > 0) {
 				this.changeQuestion()
 			}
