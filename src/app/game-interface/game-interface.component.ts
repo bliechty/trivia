@@ -14,6 +14,7 @@ import { User } from '../interfaces/user';
 export class GameInterfaceComponent implements OnInit {
 	delayTime: number = 2000
 	selectable: boolean = true
+	defaultAvatarURL: string = 'https://i0.wp.com/www.mvhsoracle.com/wp-content/uploads/2018/08/default-avatar.jpg?ssl=1'
 	
 	currentQuestions = {
 		"question": "",
@@ -80,22 +81,24 @@ export class GameInterfaceComponent implements OnInit {
 			}
 		})
 		document.getElementById(correctId).classList.add("correct")
-		if (this.currentQuestions["answers"][answerId] !== this.questions[this.count++]["correct_answer"]) {
+		if (this.currentQuestions["answers"][answerId] !== this.questions[this.count]["correct_answer"]) {
 			console.log("Incorrect")
 			document.getElementById('answer' + answerId).classList.add("incorrect")
 		}
 		else {
 			console.log("Correct")
+			this.score[this.count % this.users.length]++
 		}
 		setTimeout(() => {
 			document.getElementById(correctId).classList.remove("correct")
 			document.getElementById('answer' + answerId).classList.remove("incorrect")
-			if (this.count < this.questions.length) {
+			if (++this.count < this.questions.length) {
 				this.changeQuestion()
 			}
 			else {
 				this.currentQuestions["question"] = "done"
 				this.currentQuestions["answers"] = ["done"]
+				console.log(this.score)
 			}
 			this.selectable = true
 		}, this.delayTime)

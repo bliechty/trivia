@@ -1,4 +1,12 @@
 <mat-card class="game-main-card">
+	<mat-card class="user-card">
+		<mat-card-header>
+			<mat-card-title>
+				<img [src]="users.length > 0 ? (users[(count) % users.length]['photoURL'] ? users[(count) % users.length]['photoURL'] : defaultAvatarURL) : ''">
+				<span [innerHTML]="users.length > 0 ? (users[(count) % users.length]['displayName'] ? users[(count) % users.length]['displayName'] : users[(count) % users.length]['uid']) : ''"></span>
+			</mat-card-title>
+		</mat-card-header>
+	</mat-card>
 	<mat-card class="game-title-card">
 		<mat-card-header>
 			<mat-card-title>
