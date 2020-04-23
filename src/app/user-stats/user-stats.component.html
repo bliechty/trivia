@@ -17,17 +17,55 @@
     </mat-card-content>
   </mat-card>
   
-  <mat-card>
+  <mat-card *ngIf="player">
+    <mat-card-title>Game Stats</mat-card-title>
     <mat-card-content>
-      <mat-list>
-        <mat-card-title>Game Stats</mat-card-title>
-        <mat-list-item>Games Played: {{ player.totalGamesPlayed }}</mat-list-item>
-        <!-- <mat-progress-bar mode="determinate" value="40" color="accent"></mat-progress-bar> -->
-        <mat-list-item>Games Won: {{ player.totalGamesWon }}</mat-list-item>
-        <mat-list-item>Games Lost: {{ player.totalGamesLost }}</mat-list-item>
-        <mat-list-item>Questions Answered: {{ player.totalQuestionsAnswered }}</mat-list-item>
-        <mat-list-item>Answered Correctly: {{ player.totalQuestionsAnsweredCorrectly }}</mat-list-item>
-        <mat-list-item>Answered Incorrectly: {{ player.totalQuestionsAnsweredIncorrectly }}</mat-list-item>
+     <div class="statRow">
+        <p colspan="2">Total Games Played:</p>
+        <p>{{ player.totalGamesPlayed }}</p>
+      </div>
+      <div class="statRow">
+        <p colspan="2">Games Won:</p>
+        <p>{{ player.totalGamesWon }}</p>
+      </div>
+      <div class="statRow">
+        <p colspan="2">Games Lost:</p>
+        <p>{{ player.totalGamesLost }}</p>
+      </div>
+      <div class="statRow">
+        <p colspan="2">Questions Answered:</p>
+        <p>{{ player.totalQuestionsAnswered }}</p>
+      </div>
+      <div class="statRow">
+        <p colspan="2">Answered Correctly:</p>
+        <p>{{ player.totalQuestionsAnsweredCorrectly }}</p>
+      </div>
+      <div class="statRow">
+        <p colspan="2">Questions Incorrectly:</p>
+        <p>{{ player.totalQuestionsAnsweredIncorrectly }}</p>
+      </div>
+
+      <mat-expansion-panel class="mat-toolbar mat-accent">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Best Category(s):</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ol>
+          <li *ngFor="let category of bestCategories">{{ category }}</li>
+          <li>Something</li>
+          <li>Something really long IDK</li>
+        </ol>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel class="mat-toolbar mat-warn">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Worst Category(s):</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ol>
+          <li *ngFor="let category of worstCategories">{{ category }}</li>
+        </ol>
+      </mat-expansion-panel>
+ 
+      <!-- <mat-list>
         <mat-list-item>Best Category(s):</mat-list-item>
         <mat-list-item *ngFor="let category of bestCategories; let i = index">
           <mat-card-subtitle>{{ i + 1 }}. {{ category }}</mat-card-subtitle>
@@ -36,7 +74,7 @@
         <mat-list-item *ngFor="let category of worstCategories; let i = index">
           <mat-card-subtitle>{{ i + 1 }}. {{ category }}</mat-card-subtitle>
         </mat-list-item>
-      </mat-list>
+      </mat-list> -->
     </mat-card-content>
   </mat-card>
 </div>
