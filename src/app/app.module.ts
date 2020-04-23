@@ -23,10 +23,11 @@ import { environment } from 'src/environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { SameAmountValidatortDirective } from './setup/same-amount.directive';
 import { PlayerDialogComponent } from './setup/player-dialog/player-dialog.component';
 import { GameInterfaceComponent } from './game-interface/game-interface.component';
@@ -60,6 +61,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSnackBarModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatExpansionModule,
     HttpClientModule,
     MatMenuModule,
     MatIconModule,

@@ -10,7 +10,7 @@ import { TriviaService } from 'src/app/services/trivia.service';
 })
 export class PlayerDialogComponent implements OnInit {
   players;
-  playersPlaying = [this.authService.user];
+  playersPlaying = [this.data.currentUser];
   nextPlayer = false;
   isDisabled = false;
   chosenPlayers = 1;
@@ -27,7 +27,7 @@ export class PlayerDialogComponent implements OnInit {
   ngOnInit(): void {
     this.triviaService.getAllUsersObservable()
       .subscribe(players => {
-        let filtered = players.filter(player => player.uid !== this.authService.user.uid)
+        let filtered = players.filter(player => player.uid !== this.data.currentUser.uid)
 
         this.players = filtered
       })

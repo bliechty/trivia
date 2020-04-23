@@ -18,6 +18,8 @@ export class UserStatsComponent implements OnInit {
 
   currentUserSubscription: Subscription;
 
+  defaultAvatarURL: string = 'https://i0.wp.com/www.mvhsoracle.com/wp-content/uploads/2018/08/default-avatar.jpg?ssl=1';
+
   constructor(
     private triviaService: TriviaService,
     private authService: AuthService
