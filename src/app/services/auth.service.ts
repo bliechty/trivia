@@ -61,6 +61,7 @@ export class AuthService {
             }
 
             this.af.collection('users').doc(this.user.uid).set({
+              ...this.user,
               totalGamesPlayed: 0,
               totalGamesWon: 0,
               totalGamesLost: 0,

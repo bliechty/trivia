@@ -45,7 +45,7 @@
         <p>{{ player.totalQuestionsAnsweredIncorrectly }}</p>
       </div>
 
-      <mat-expansion-panel class="mat-toolbar mat-accent">
+      <mat-expansion-panel class="mat-toolbar mat-accent" *ngIf="bestCategories">
         <mat-expansion-panel-header>
           <mat-panel-title>Best Category(s):</mat-panel-title>
         </mat-expansion-panel-header>
@@ -54,7 +54,7 @@
         </ol>
       </mat-expansion-panel>
 
-      <mat-expansion-panel class="mat-toolbar mat-warn">
+      <mat-expansion-panel class="mat-toolbar mat-warn" *ngIf="worstCategories">
         <mat-expansion-panel-header>
           <mat-panel-title>Worst Category(s):</mat-panel-title>
         </mat-expansion-panel-header>
