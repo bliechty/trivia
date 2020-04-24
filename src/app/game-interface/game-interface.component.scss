@@ -100,12 +100,34 @@ span.info {
 }
 
 .hide {
-	display: none;
+	display: none !important;
 }
 
 // ----------------------
 // ----------------------
 // ----------------------
+
+.resultButtons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.resultButtons button:last-child {
+	background-color: #fff !important;
+	color: #252525;
+	padding: 10px 30px;
+}
+.resultButtons button:first-child {
+	background-color: #49a549 !important;
+	color: #fff !important;
+	padding: 10px 30px;
+}
+.finalMessage {
+	background-color: #49a549;
+	color: #fff;
+	text-align: center;
+}
 
 .user-card {
 	background-color: #ec576b;

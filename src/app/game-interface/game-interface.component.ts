@@ -47,6 +47,21 @@ export class GameInterfaceComponent implements OnInit {
 		}
 		return winning
 	}
+	finalWinner() {
+		let winners = []
+		let highestScore = 0
+		this.score.forEach((v, i) => {
+			if (v > highestScore) {
+				winners = [this.users[i]['displayName'] ? this.users[i]['displayName'] : this.users[i]['uid']]
+				highestScore = v
+			}
+			else if (v >= highestScore) {
+				winners.push(this.users[i]['displayName'] ? this.users[i]['displayName'] : this.users[i]['uid'])
+				highestScore = v
+			}
+		})
+		return `${winners.length > 1 ? 'Winners' : 'Winner'}: ${winners.toString()}`
+	}
 	updateData() {
 		let dataObject: Data = this.sendDataService.getGameData()
 		this.questions = dataObject["questions"]
@@ -119,8 +134,8 @@ export class GameInterfaceComponent implements OnInit {
 				this.changeQuestion()
 			}
 			else {
-				this.currentQuestions["question"] = "done"
-				this.currentQuestions["answers"] = ["done"]
+				this.currentQuestions["question"] = ""
+				this.currentQuestions["answers"] = []
 				console.log(this.score)
 			}
 			this.selectable = true

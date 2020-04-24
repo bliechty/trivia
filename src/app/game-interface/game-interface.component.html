@@ -1,4 +1,4 @@
-<mat-card class="game-main-card">
+<mat-card [ngClass]="{'game-main-card': true, 'hide': count >= questions.length}">
 	<mat-card [ngClass]="{'user-card': true, 'hide': users.length <= 1}">
 		<mat-card-header>
 			<mat-card-title>
@@ -24,6 +24,9 @@
 <mat-card class="progress-card">
 	<mat-card-title class="progress-title">{{ count }}/{{ questions.length }} Questions</mat-card-title>
 	<mat-slider min="0" max="{{questions.length}}" step="1" value="{{count}}" [disabled]="true"></mat-slider>
+	<mat-card [ngClass]="{'finalMessage': true, 'hide': count < questions.length || users.length <= 1}">
+		<mat-card-title>{{ finalWinner() }}</mat-card-title>
+	</mat-card>
 	<mat-card class="user-progress-card" *ngFor="let user of users; let i = index">
 		<mat-card-title class="user-progress-title">
 			{{ user['displayName'] ? user['displayName'] : user['uid'] }}
@@ -33,5 +36,8 @@
 		<mat-slider class="correct-slider" min="0" max="{{questions.length/users.length}}" step="1" value="{{score[i]}}" [disabled]="true"></mat-slider>
 		<mat-slider class="incorrect-slider" min="0" max="{{questions.length/users.length}}" step="1" value="{{wrong[i]}}" [disabled]="true"></mat-slider>
 	</mat-card>
-	
+	<mat-card-actions [ngClass]="{'resultButtons': true, 'hide': count < questions.length}">
+		<button mat-button routerLink="/set-up">Play Again</button>
+		<button mat-button routerLink="/userStats">Open Stats</button>
+	</mat-card-actions>
 </mat-card>
