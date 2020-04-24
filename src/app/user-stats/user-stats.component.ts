@@ -13,17 +13,18 @@ import { AuthService } from '../services/auth.service';
 export class UserStatsComponent implements OnInit {
   player: User;
 
-  worstCategories: string[];
-  bestCategories: string[];
+  worstCategories: string[] = ["No data yet. Go play some games!"];
+  bestCategories: string[]  = ["No data yet. Go play some games!"];
 
   currentUserSubscription: Subscription;
 
   defaultAvatarURL: string = 'https://i0.wp.com/www.mvhsoracle.com/wp-content/uploads/2018/08/default-avatar.jpg?ssl=1';
+  avatar: string;
 
   constructor(
     private triviaService: TriviaService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.authService.userIdChange.subscribe(id => {
@@ -54,16 +55,21 @@ export class UserStatsComponent implements OnInit {
             }
           }
 
-          if (cHR.length !== 0) {
-            this.bestCategories = cHR;
-            
+          if (user.categoryAnswers.length !== 0) {
+            if (cHR.length !== 0) {
+              this.bestCategories = cHR;
+              this.worstCategories = cLR;
+            }
           }
 
-          if (cLR.length !== 0) {
-            this.worstCategories = cLR;
+          if(user.photoURL) {
+            this.avatar = user.photoURL + "?type=large"
+          } else {
+            this.avatar = this.defaultAvatarURL
           }
 
           this.player = user;
+          
         });
       }
     });

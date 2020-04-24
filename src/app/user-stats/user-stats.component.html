@@ -1,9 +1,9 @@
 <div>
-  <!-- <mat-card *ngIf="player" class="mat-toolbar mat-warn" id="user">
+  <mat-card *ngIf="player" class="mat-toolbar mat-warn" id="user">
     <mat-card-title *ngIf="player.email || player.displayName">{{ player.displayName ? player.displayName : getDefaultUsername(player.email) }}</mat-card-title>
   
     <mat-card-content class="main">
-      <img [src]="player.photoURL ? player.photoURL : defaultAvatarURL">
+      <img [src]="avatar">
       <mat-list>
         <mat-list-item *ngIf="player.email">
           <mat-card-subtitle>
@@ -15,13 +15,10 @@
         </mat-list-item>
       </mat-list>
     </mat-card-content>
-  </mat-card> -->
+  </mat-card>
   
-  <mat-card *ngIf="player" id="info">
-    <mat-card-title>
-      {{ player.displayName ? player.displayName : getDefaultUsername(player.email) }}'s Game Stats
-    </mat-card-title>
-    <mat-card-subtitle>{{ player.email }}</mat-card-subtitle>
+  <mat-card *ngIf="player">
+    <mat-card-title>Game Stats</mat-card-title>
     <mat-card-content>
      <div class="statRow">
         <p colspan="2">Total Games Played:</p>
@@ -48,7 +45,7 @@
         <p>{{ player.totalQuestionsAnsweredIncorrectly }}</p>
       </div>
 
-      <mat-expansion-panel class="mat-toolbar mat-accent" *ngIf="bestCategories">
+      <mat-expansion-panel class="mat-toolbar mat-accent">
         <mat-expansion-panel-header>
           <mat-panel-title>Best Category(s):</mat-panel-title>
         </mat-expansion-panel-header>
@@ -57,7 +54,7 @@
         </ol>
       </mat-expansion-panel>
 
-      <mat-expansion-panel class="mat-toolbar mat-warn" *ngIf="worstCategories">
+      <mat-expansion-panel class="mat-toolbar mat-warn">
         <mat-expansion-panel-header>
           <mat-panel-title>Worst Category(s):</mat-panel-title>
         </mat-expansion-panel-header>
