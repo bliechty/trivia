@@ -23,6 +23,7 @@ export class GameInterfaceComponent implements OnInit {
 	users: User[] = []
 	questions: Result[] = []
 	score: number[] = []
+	wrong: number[] = []
 	count: number = 0
 
 	constructor(
@@ -37,8 +38,16 @@ export class GameInterfaceComponent implements OnInit {
 		let dataObject: Data = this.sendDataService.getGameData()
 		this.questions = dataObject["questions"]
 		this.users = dataObject["users"]
-		this.users.forEach(() => {
-			this.score.push(0)
+		this.users.forEach((v) => {
+			if (typeof v !== 'object') {
+				this.users = []
+				this.score = []
+				this.wrong = []
+			}
+			else {
+				this.score.push(0)
+				this.wrong.push(0)
+			}
 		})
 	}
 	changeQuestion() {
@@ -83,6 +92,7 @@ export class GameInterfaceComponent implements OnInit {
 		document.getElementById(correctId) ? document.getElementById(correctId).classList.add("correct") : ''
 		if (this.currentQuestions["answers"][answerId] !== this.questions[this.count]["correct_answer"]) {
 			console.log("Incorrect")
+			this.wrong[this.count % this.users.length]++
 			document.getElementById('answer' + answerId) ? document.getElementById('answer' + answerId).classList.add("incorrect") : ''
 		}
 		else {
