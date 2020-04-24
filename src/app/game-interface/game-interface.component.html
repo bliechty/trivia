@@ -1,5 +1,5 @@
 <mat-card class="game-main-card">
-	<mat-card class="user-card">
+	<mat-card [ngClass]="{'user-card': true, 'hide': users.length <= 1}">
 		<mat-card-header>
 			<mat-card-title>
 				<img [src]="users.length > 0 ? (users[(count) % users.length]['photoURL'] ? users[(count) % users.length]['photoURL'] : defaultAvatarURL) : ''">
@@ -27,7 +27,7 @@
 	<mat-card class="user-progress-card" *ngFor="let user of users; let i = index">
 		<mat-card-title class="user-progress-title">
 			{{ user['displayName'] ? user['displayName'] : user['uid'] }}
-			<span [className]="isWinning(i) ? 'winning' : 'losing'" [innerHTML]="isWinning(i) ? 'WINNING' : 'LOSING'"></span>
+			<span [className]="users.length > 1 ? (isWinning(i) ? 'winning' : 'losing') : 'hide'" [innerHTML]="isWinning(i) ? 'WINNING' : 'LOSING'"></span>
 			<span class="info">{{score[i]}} CORRECT | {{wrong[i]}} WRONG</span>
 		</mat-card-title>
 		<mat-slider class="correct-slider" min="0" max="{{questions.length/users.length}}" step="1" value="{{score[i]}}" [disabled]="true"></mat-slider>

@@ -86,16 +86,21 @@ mat-card, mat-card-actions {
 span.winning {
 	font-size: 14px;
 	color: #49a549;
-	margin: 0 10px;
+	margin-left: 10px;
 }
 span.losing {
 	font-size: 14px;
 	color: #ec576b;
-	margin: 0 10px;
+	margin-left: 10px;
 }
 span.info {
 	font-size: 12px;
 	color: #aaa;
+	margin-left: 10px;
+}
+
+.hide {
+	display: none;
 }
 
 // ----------------------
