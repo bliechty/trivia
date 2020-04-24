@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Result } from '../interfaces/result';
 import { Data } from '../interfaces/data';
 import { User } from '../interfaces/user';
+import { CategoryAnswer } from '../interfaces/categoryAnswer'
+import { TriviaService } from '../services/trivia.service';
 
 @Component({
 	selector: 'app-game-interface',
@@ -27,6 +29,7 @@ export class GameInterfaceComponent implements OnInit {
 	count: number = 0
 
 	constructor(
+		private triviaService: TriviaService,
 		private sendDataService: SendDataService,
 		private router: Router
 	){ }
@@ -119,13 +122,23 @@ export class GameInterfaceComponent implements OnInit {
 		})
 		document.getElementById(correctId) ? document.getElementById(correctId).classList.add("correct") : ''
 		if (this.currentQuestions["answers"][answerId] !== this.questions[this.count]["correct_answer"]) {
-			console.log("Incorrect")
 			this.wrong[this.count % this.users.length]++
 			document.getElementById('answer' + answerId) ? document.getElementById('answer' + answerId).classList.add("incorrect") : ''
+			let wrongAnswer: CategoryAnswer = {
+				answeredCorrectly: 0,
+				answeredIncorrectly: 1,
+				category: this.questions[this.count]["category"]
+			}
+			this.users[this.count % this.users.length]['categoryAnswers'].push(wrongAnswer)
 		}
 		else {
-			console.log("Correct")
 			this.score[this.count % this.users.length]++
+			let correctAnswer: CategoryAnswer = {
+				answeredCorrectly: 1,
+				answeredIncorrectly: 0,
+				category: this.questions[this.count]["category"]
+			}
+			this.users[this.count % this.users.length]['categoryAnswers'].push(correctAnswer)
 		}
 		setTimeout(() => {
 			document.getElementById(correctId) ? document.getElementById(correctId).classList.remove("correct") : ''
@@ -136,7 +149,21 @@ export class GameInterfaceComponent implements OnInit {
 			else {
 				this.currentQuestions["question"] = ""
 				this.currentQuestions["answers"] = []
-				console.log(this.score)
+				//End of the game. Scores all in
+				//console.log(this.score)
+				this.users.forEach((v, i) => {
+					if (this.isWinning(i)) {
+						this.users[i]['totalGamesWon']++
+					}
+					else {
+						this.users[i]['totalGamesLost']++
+					}
+					this.users[i]['totalQuestionsAnswered'] += (this.questions.length / this.users.length)
+					this.users[i]['totalQuestionsAnsweredCorrectly'] += this.score[i]
+					this.users[i]['totalQuestionsAnsweredIncorrectly'] += this.wrong[i]
+					this.users[i]['totalGamesPlayed']++
+				})
+				this.triviaService.updateUserStats(this.users)
 			}
 			this.selectable = true
 		}, this.delayTime)
