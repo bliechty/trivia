@@ -42,7 +42,7 @@ export class GameInterfaceComponent implements OnInit {
 		})
 	}
 	changeQuestion() {
-		if (this.questions.length > 0) {
+		if (this.questions.length > 0 && this.users.length > 0) {
 			this.currentQuestions["question"] = this.questions[this.count]["question"]
 			this.currentQuestions["answers"] = this.questions[this.count]["incorrect_answers"].concat(this.questions[this.count]["correct_answer"])
 			if (this.currentQuestions["answers"].length > 2) {
@@ -63,7 +63,7 @@ export class GameInterfaceComponent implements OnInit {
 		}
 		else {
 			this.updateData()
-			if (this.questions.length > 0) {
+			if (this.questions.length > 0 && this.users.length > 0) {
 				this.changeQuestion()
 			}
 			else {
@@ -80,18 +80,18 @@ export class GameInterfaceComponent implements OnInit {
 				correctId = "answer" + i
 			}
 		})
-		document.getElementById(correctId).classList.add("correct")
+		document.getElementById(correctId) ? document.getElementById(correctId).classList.add("correct") : ''
 		if (this.currentQuestions["answers"][answerId] !== this.questions[this.count]["correct_answer"]) {
 			console.log("Incorrect")
-			document.getElementById('answer' + answerId).classList.add("incorrect")
+			document.getElementById('answer' + answerId) ? document.getElementById('answer' + answerId).classList.add("incorrect") : ''
 		}
 		else {
 			console.log("Correct")
 			this.score[this.count % this.users.length]++
 		}
 		setTimeout(() => {
-			document.getElementById(correctId).classList.remove("correct")
-			document.getElementById('answer' + answerId).classList.remove("incorrect")
+			document.getElementById(correctId) ? document.getElementById(correctId).classList.remove("correct") : ''
+			document.getElementById('answer' + answerId) ? document.getElementById('answer' + answerId).classList.remove("incorrect") : ''
 			if (++this.count < this.questions.length) {
 				this.changeQuestion()
 			}

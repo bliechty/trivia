@@ -22,7 +22,6 @@
 	</mat-card-actions>
 </mat-card>
 <mat-card class="progress-card">
-	<mat-card class="total-progress-card">
-		<mat-slider min="0" max="10" step="1" value="0"></mat-slider>
-	</mat-card>
+	<mat-card-title class="progress-title">{{ count }}/{{ questions.length }}</mat-card-title>
+	<mat-slider min="0" max="{{questions.length}}" step="1" value="{{count}}" [disabled]="true"></mat-slider>
 </mat-card>
