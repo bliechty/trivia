@@ -13,8 +13,8 @@ import { AuthService } from '../services/auth.service';
 export class UserStatsComponent implements OnInit {
   player: User;
 
-  worstCategories: string[];
-  bestCategories: string[];
+  worstCategories: string[] = ["No data yet. Go play some games!"];
+  bestCategories: string[]  = ["No data yet. Go play some games!"];
 
   currentUserSubscription: Subscription;
 
@@ -23,7 +23,7 @@ export class UserStatsComponent implements OnInit {
   constructor(
     private triviaService: TriviaService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.authService.userIdChange.subscribe(id => {
@@ -61,8 +61,10 @@ export class UserStatsComponent implements OnInit {
           }
 
           if (user.categoryAnswers.length !== 0) {
-            this.bestCategories = cHR;
-            this.worstCategories = cLR;
+            if (cHR.length !== 0) {
+              this.bestCategories = cHR;
+              this.worstCategories = cLR;
+            }
           }
 
           this.player = user;
