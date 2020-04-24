@@ -1,5 +1,5 @@
 <div>
-  <mat-card *ngIf="player" class="mat-toolbar mat-warn" id="user">
+  <!-- <mat-card *ngIf="player" class="mat-toolbar mat-warn" id="user">
     <mat-card-title *ngIf="player.email || player.displayName">{{ player.displayName ? player.displayName : getDefaultUsername(player.email) }}</mat-card-title>
   
     <mat-card-content class="main">
@@ -15,10 +15,13 @@
         </mat-list-item>
       </mat-list>
     </mat-card-content>
-  </mat-card>
+  </mat-card> -->
   
-  <mat-card *ngIf="player">
-    <mat-card-title>Game Stats</mat-card-title>
+  <mat-card *ngIf="player" id="info">
+    <mat-card-title>
+      {{ player.displayName ? player.displayName : getDefaultUsername(player.email) }}'s Game Stats
+    </mat-card-title>
+    <mat-card-subtitle>{{ player.email }}</mat-card-subtitle>
     <mat-card-content>
      <div class="statRow">
         <p colspan="2">Total Games Played:</p>
