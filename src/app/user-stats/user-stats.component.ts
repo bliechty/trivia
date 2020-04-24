@@ -19,6 +19,7 @@ export class UserStatsComponent implements OnInit {
   currentUserSubscription: Subscription;
 
   defaultAvatarURL: string = 'https://i0.wp.com/www.mvhsoracle.com/wp-content/uploads/2018/08/default-avatar.jpg?ssl=1';
+  avatar: string;
 
   constructor(
     private triviaService: TriviaService,
@@ -29,34 +30,28 @@ export class UserStatsComponent implements OnInit {
     this.authService.userIdChange.subscribe(id => {
       if (id !== '') {
         this.currentUserSubscription = this.triviaService.getCurrentUserObservable(id).subscribe(user => {
-          let cH;
-          let cL;
+          let cH = 0;
+          let cL = 1;
           let cHR: string[] = [];
           let cLR: string[] = [];
 
           for (let cA of user.categoryAnswers) {
-            if (cA.answeredCorrectly === 0 && cA.answeredIncorrectly === 0) {
-              break;
-            }
+            if (cA.answeredCorrectly !== 0 && cA.answeredIncorrectly !== 0) {
+              const ratio: number = Number((cA.answeredCorrectly / (cA.answeredCorrectly + cA.answeredIncorrectly)).toFixed(1));
 
-            const ratio: number = Number((cA.answeredCorrectly / (cA.answeredCorrectly + cA.answeredIncorrectly)).toFixed(1));
+              if (cH === ratio) {
+                cHR.push(cA.category);
+              } else if (cH < ratio) {
+                cH = ratio;
+                cHR = [cA.category];
+              }
 
-            if (!cH && !cL) {
-              cH = cL = ratio;
-            }
-
-            if (cH === ratio) {
-              cHR.push(cA.category);
-            } else if (cH < ratio) {
-              cH = ratio;
-              cHR = [cA.category];
-            }
-
-            if (cL === ratio) {
-              cLR.push(cA.category);
-            } else if (cL > ratio) {
-              cL = ratio;
-              cLR = [cA.category];
+              if (cL === ratio) {
+                cLR.push(cA.category);
+              } else if (cL > ratio) {
+                cL = ratio;
+                cLR = [cA.category];
+              }
             }
           }
 
@@ -67,7 +62,14 @@ export class UserStatsComponent implements OnInit {
             }
           }
 
+          if(user.photoURL) {
+            this.avatar = user.photoURL + "?type=large"
+          } else {
+            this.avatar = this.defaultAvatarURL
+          }
+
           this.player = user;
+          
         });
       }
     });

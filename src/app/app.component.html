@@ -6,9 +6,11 @@
         <button routerLink="/set-up" mat-raised-button color="primary">Game Set Up</button>
 
         <button mat-raised-button [matMenuTriggerFor]="menu" id="message">
+          <img id="avatar" [src]="userAvatarURL ? userAvatarURL : defaultAvatarURL"/>
           {{ firstName }}
           <mat-icon>arrow_drop_down</mat-icon>
         </button>
+        
         <mat-menu #menu="matMenu" class="mat-toolbar mat-warn">
           <button mat-menu-item routerLink="/userStats">
             Profile

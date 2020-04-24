@@ -46,14 +46,25 @@ div {
   justify-content: center;
 }
 
-#user {
-  height: 384px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
+// #user {
+//   height: 384px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column;
+// }
 
 ol {
   color: #000000;
+}
+
+#info {
+  min-width: 400px;
+}
+
+@media only screen and (max-width: 500px) {
+  #info {
+    min-width: 0px;
+    width: 100%;
+  }
 }
