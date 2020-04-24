@@ -34,6 +34,19 @@ export class GameInterfaceComponent implements OnInit {
 		this.updateData()
 		this.changeQuestion()
 	}
+	isWinning(userIndex) {
+		let winning = false
+		let highestScore = 0
+		this.score.forEach((v, i) => {
+			if (userIndex !== i && v > highestScore) {
+				highestScore = v
+			}
+		})
+		if (this.score[userIndex] >= highestScore) {
+			winning = true
+		}
+		return winning
+	}
 	updateData() {
 		let dataObject: Data = this.sendDataService.getGameData()
 		this.questions = dataObject["questions"]
