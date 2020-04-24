@@ -8,6 +8,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../interfaces/user';
 import { Subject, BehaviorSubject } from 'rxjs';
 
+import { TriviaService } from './trivia.service';
+import { CategoryAnswer } from '../interfaces/categoryAnswer';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,7 +27,8 @@ export class AuthService {
   constructor(
     private af: AngularFirestore,
     private afa: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private triviaService: TriviaService
   ) {
     this.afa.authState.subscribe(user => {
       if (user) {
@@ -45,15 +49,26 @@ export class AuthService {
         const usersRef = this.af.collection('users').doc(this.user.uid);
 
         usersRef.update({...this.user}).catch(_ => {
-          usersRef.set({
-            ...this.user,
-            totalGamesPlayed: 0,
-            totalGamesWon: 0,
-            totalGamesLost: 0,
-            totalQuestionsAnswered: 0,
-            totalQuestionsAnsweredIncorrectly: 0,
-            totalQuestionsAnsweredCorrectly: 0,
-            categoryAnswers: []
+          this.triviaService.getCategoriesObservable().subscribe(categories => {
+            const categoryAnswers: CategoryAnswer[] = [];
+
+            for (let categoryObj of categories) {
+              categoryAnswers.push({
+                answeredCorrectly: 0,
+                answeredIncorrectly: 0,
+                category: categoryObj.name
+              });
+            }
+
+            this.af.collection('users').doc(this.user.uid).set({
+              totalGamesPlayed: 0,
+              totalGamesWon: 0,
+              totalGamesLost: 0,
+              totalQuestionsAnswered: 0,
+              totalQuestionsAnsweredIncorrectly: 0,
+              totalQuestionsAnsweredCorrectly: 0,
+              categoryAnswers
+            });
           });
         });
       }

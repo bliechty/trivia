@@ -1,10 +1,10 @@
 mat-card {
     margin: 20px;
-    min-width: 288px;
+    width: 320px;
 }
 
 mat-card-content {
-  margin: 20px
+  margin-top: 10px;
 }
 
 mat-expansion-panel {
@@ -24,9 +24,10 @@ mat-expansion-panel {
 }
 
 img {
-  width: 80%;
+  width: 60%;
   max-width: 400px;
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .main {
@@ -39,15 +40,20 @@ ol {
   text-align: initial;
 }
 
-@media screen and (min-width: 1100px) {
-  // .main {
-  //   display: flex;
-  //   justify-content: center;
-  //   // align-items: center;
-  // }
+div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-  div {
-    display: flex;
-    justify-content: center;
-  }
+#user {
+  height: 384px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+ol {
+  color: #000000;
 }

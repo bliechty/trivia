@@ -35,7 +35,12 @@ export class UserStatsComponent implements OnInit {
           let cLR: string[] = [];
 
           for (let cA of user.categoryAnswers) {
-            const ratio = (cA.answeredCorrectly / cA.answeredIncorrectly).toFixed(1);
+            if (cA.answeredCorrectly === 0 && cA.answeredIncorrectly === 0) {
+              break;
+            }
+
+            const ratio: number = Number((cA.answeredCorrectly / (cA.answeredCorrectly + cA.answeredIncorrectly)).toFixed(1));
+
             if (!cH && !cL) {
               cH = cL = ratio;
             }

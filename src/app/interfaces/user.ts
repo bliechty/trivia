@@ -1,4 +1,4 @@
-import { categoryAnswer } from './categoryAnswer';
+import { CategoryAnswer } from './categoryAnswer';
 
 export interface User {
   uid: string,
@@ -7,7 +7,7 @@ export interface User {
   email: string,
   phoneNumber: string,
   providerId: string,
-  categoryAnswers?: categoryAnswer[],
+  categoryAnswers?: CategoryAnswer[],
   totalGamesLost?: number,
   totalGamesWon?: number,
   totalQuestionsAnswered?: number,
