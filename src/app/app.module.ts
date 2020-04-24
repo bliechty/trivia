@@ -33,6 +33,7 @@ import { PlayerDialogComponent } from './setup/player-dialog/player-dialog.compo
 import { GameInterfaceComponent } from './game-interface/game-interface.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { MatDividerModule } from '@angular/material/divider';
     AngularFireAuthModule,
     AngularFirestoreModule,
     FontAwesomeModule,
-    MatToolbarModule
+    MatToolbarModule,
+	MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
