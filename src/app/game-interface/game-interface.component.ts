@@ -45,7 +45,7 @@ export class GameInterfaceComponent implements OnInit {
 				highestScore = v
 			}
 		})
-		if (this.score[userIndex] > highestScore && this.score[userIndex] > 0) {
+		if (this.score[userIndex] >= highestScore && this.score[userIndex] > 0) {
 			winning = "W"
 		}
 		else if (this.score[userIndex] >= highestScore) {
