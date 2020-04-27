@@ -55,15 +55,24 @@ export class UserStatsComponent implements OnInit {
             }
           }
 
-          if (user.categoryAnswers.length !== 0) {
-            if (cHR.length !== 0) {
+          if (cHR.join() === cLR.join() && (cHR.length > 0 && cLR.length > 0)) {
+            this.bestCategories = cHR;
+          } else {
+            if (cHR.length > 0) {
               this.bestCategories = cHR;
+            }
+  
+            if (cLR.length > 0) {
               this.worstCategories = cLR;
             }
           }
 
           if(user.photoURL) {
-            this.avatar = user.photoURL + "?type=large"
+            if (/facebook/.test(user.photoURL)) {
+              this.avatar = user.photoURL + "?type=large"
+            } else {
+              this.avatar = user.photoURL;
+            }
           } else {
             this.avatar = this.defaultAvatarURL
           }

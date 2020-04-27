@@ -49,18 +49,18 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Best Category(s):</mat-panel-title>
         </mat-expansion-panel-header>
-        <ol>
+        <ul>
           <li *ngFor="let category of bestCategories">{{ category }}</li>
-        </ol>
+        </ul>
       </mat-expansion-panel>
 
       <mat-expansion-panel class="mat-toolbar mat-warn">
         <mat-expansion-panel-header>
           <mat-panel-title>Worst Category(s):</mat-panel-title>
         </mat-expansion-panel-header>
-        <ol>
+        <ul>
           <li *ngFor="let category of worstCategories">{{ category }}</li>
-        </ol>
+        </ul>
       </mat-expansion-panel>
  
       <!-- <mat-list>
