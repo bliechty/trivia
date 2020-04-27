@@ -1140,14 +1140,12 @@ class AuthService {
         });
     }
     signup(email, password) {
-        console.log(email, password);
         this.afa.createUserWithEmailAndPassword(email, password)
             .then(_ => {
             console.log('Successfully created an account');
         })
             .catch(e => {
             console.log('Error with signing up:');
-            console.log(e.message);
             this.signupErrorChange.next(e.message);
         });
     }

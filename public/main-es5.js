@@ -2206,12 +2206,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function signup(email, password) {
           var _this7 = this;
 
-          console.log(email, password);
           this.afa.createUserWithEmailAndPassword(email, password).then(function (_) {
             console.log('Successfully created an account');
           })["catch"](function (e) {
             console.log('Error with signing up:');
-            console.log(e.message);
 
             _this7.signupErrorChange.next(e.message);
           });
