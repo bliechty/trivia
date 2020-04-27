@@ -99,6 +99,7 @@ export class AuthService {
       })
       .catch(e => {
         console.log('Error with signing up:');
+        console.log(e.message);
 
         this.signupErrorChange.next(e.message);
       });
