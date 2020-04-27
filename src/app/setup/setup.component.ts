@@ -100,7 +100,7 @@ export class SetupComponent implements OnInit {
   getCurrentUser() {
     this.authService.userIdChange.subscribe(id => {
       if(id !== '') {
-      this.triviaService.getCurrentUserObservable(id).subscribe(user => this.currentUser = user)
+        this.triviaService.getCurrentUserObservable(id).subscribe(user => this.currentUser = user)
       }
     })
   }

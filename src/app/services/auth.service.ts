@@ -42,13 +42,11 @@ export class AuthService {
           displayName = email.replace(/@.+/, '');
         }
 
-        this.userIdChange.next(this.user.uid);
-        this.loggedInChange.next(true);
-        this.firstNameChange.next(displayName);
-
         const usersRef = this.af.collection('users').doc(this.user.uid);
 
-        usersRef.update({...this.user}).catch(_ => {
+        usersRef.update({...this.user}).then(_ => {
+          this.allChanges(displayName);
+        }).catch(_ => {
           this.triviaService.getCategoriesObservable().subscribe(categories => {
             const categoryAnswers: CategoryAnswer[] = [];
 
@@ -69,6 +67,8 @@ export class AuthService {
               totalQuestionsAnsweredIncorrectly: 0,
               totalQuestionsAnsweredCorrectly: 0,
               categoryAnswers
+            }).then(_ => {
+              this.allChanges(displayName);
             });
           });
         });
@@ -116,5 +116,11 @@ export class AuthService {
 
         this.signinErrorChange.next(e.message);
       });
+  }
+
+  allChanges(displayName: string): void {
+    this.loggedInChange.next(true);
+    this.userIdChange.next(this.user.uid);
+    this.firstNameChange.next(displayName);
   }
 }
