@@ -59,6 +59,13 @@ div {
   min-width: 400px;
 }
 
+#user {
+  height: 406px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 @media only screen and (max-width: 500px) {
   #info {
     min-width: 0px;

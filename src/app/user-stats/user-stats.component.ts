@@ -13,8 +13,8 @@ import { AuthService } from '../services/auth.service';
 export class UserStatsComponent implements OnInit {
   player: User;
 
-  worstCategories: string[] = ["No data yet. Go play some games!"];
-  bestCategories: string[]  = ["No data yet. Go play some games!"];
+  worstCategories: string[] = ["Answer 10 questions in one category for something to show up! &#128516"];
+  bestCategories: string[]  = ["Answer 10 questions in one category for something to show up! &#128516"];
 
   currentUserSubscription: Subscription;
 
@@ -36,7 +36,8 @@ export class UserStatsComponent implements OnInit {
           let cLR: string[] = [];
 
           for (let cA of user.categoryAnswers) {
-            if (cA.answeredCorrectly !== 0 && cA.answeredIncorrectly !== 0) {
+            if ((cA.answeredCorrectly !== 0 || cA.answeredIncorrectly !== 0) &&
+                ((cA.answeredCorrectly + cA.answeredIncorrectly) >= 10)) {
               const ratio: number = Number((cA.answeredCorrectly / (cA.answeredCorrectly + cA.answeredIncorrectly)).toFixed(1));
 
               if (cH === ratio) {

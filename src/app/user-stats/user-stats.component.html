@@ -50,7 +50,7 @@
           <mat-panel-title>Best Category(s):</mat-panel-title>
         </mat-expansion-panel-header>
         <ul>
-          <li *ngFor="let category of bestCategories">{{ category }}</li>
+          <li *ngFor="let category of bestCategories" [innerHTML]="category"></li>
         </ul>
       </mat-expansion-panel>
 
@@ -59,7 +59,7 @@
           <mat-panel-title>Worst Category(s):</mat-panel-title>
         </mat-expansion-panel-header>
         <ul>
-          <li *ngFor="let category of worstCategories">{{ category }}</li>
+          <li *ngFor="let category of worstCategories" [innerHTML]="category"></li>
         </ul>
       </mat-expansion-panel>
  
