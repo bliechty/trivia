@@ -161,6 +161,9 @@ export class GameInterfaceComponent implements OnInit {
 					else if (this.isWinning(i) === "L" && this.users.length > 1) {
 						this.users[i]['totalGamesLost']++
 					}
+					else if (this.isWinning(i) === "T" && this.users.length > 1 && this.score[i] > 0) {
+						this.users[i]['totalGamesWon']++
+					}
 					this.users[i]['totalQuestionsAnswered'] += (this.questions.length / this.users.length)
 					this.users[i]['totalQuestionsAnsweredCorrectly'] += this.score[i]
 					this.users[i]['totalQuestionsAnsweredIncorrectly'] += this.wrong[i]
