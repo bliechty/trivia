@@ -38,15 +38,18 @@ export class GameInterfaceComponent implements OnInit {
 		this.changeQuestion()
 	}
 	isWinning(userIndex) {
-		let winning = false
+		let winning = "L"
 		let highestScore = 0
 		this.score.forEach((v, i) => {
 			if (userIndex !== i && v > highestScore) {
 				highestScore = v
 			}
 		})
-		if (this.score[userIndex] >= highestScore) {
-			winning = true
+		if (this.score[userIndex] > highestScore && this.score[userIndex] > 0) {
+			winning = "W"
+		}
+		else if (this.score[userIndex] >= highestScore) {
+			winning = "T"
 		}
 		return winning
 	}
@@ -54,16 +57,16 @@ export class GameInterfaceComponent implements OnInit {
 		let winners = []
 		let highestScore = 0
 		this.score.forEach((v, i) => {
-			if (v > highestScore) {
+			if (v > highestScore && v > 0) {
 				winners = [this.users[i]['displayName'] ? this.users[i]['displayName'] : this.users[i]['uid']]
 				highestScore = v
 			}
-			else if (v >= highestScore) {
+			else if (v >= highestScore && highestScore > 0) {
 				winners.push(this.users[i]['displayName'] ? this.users[i]['displayName'] : this.users[i]['uid'])
 				highestScore = v
 			}
 		})
-		return `${winners.length > 1 ? 'Winners' : 'Winner'}: ${winners.toString()}`
+		return `${winners.length > 1 ? 'Winners' : 'Winner'}: ${winners.length > 0 ? winners.toString() : 'NO ONE'}`
 	}
 	updateData() {
 		let dataObject: Data = this.sendDataService.getGameData()
@@ -121,24 +124,24 @@ export class GameInterfaceComponent implements OnInit {
 			}
 		})
 		document.getElementById(correctId) ? document.getElementById(correctId).classList.add("correct") : ''
+		let correctCategory: number = -1
+		this.users[this.count % this.users.length]['categoryAnswers'].forEach((v, i) => {
+			if (v["category"] === this.questions[this.count]["category"] && correctCategory === -1) {
+				correctCategory = i
+			}
+		})
 		if (this.currentQuestions["answers"][answerId] !== this.questions[this.count]["correct_answer"]) {
 			this.wrong[this.count % this.users.length]++
 			document.getElementById('answer' + answerId) ? document.getElementById('answer' + answerId).classList.add("incorrect") : ''
-			let wrongAnswer: CategoryAnswer = {
-				answeredCorrectly: 0,
-				answeredIncorrectly: 1,
-				category: this.questions[this.count]["category"]
+			if (correctCategory > -1) {
+				this.users[this.count % this.users.length]['categoryAnswers'][correctCategory]["answeredIncorrectly"]++
 			}
-			this.users[this.count % this.users.length]['categoryAnswers'].push(wrongAnswer)
 		}
 		else {
 			this.score[this.count % this.users.length]++
-			let correctAnswer: CategoryAnswer = {
-				answeredCorrectly: 1,
-				answeredIncorrectly: 0,
-				category: this.questions[this.count]["category"]
+			if (correctCategory > -1) {
+				this.users[this.count % this.users.length]['categoryAnswers'][correctCategory]["answeredCorrectly"]++
 			}
-			this.users[this.count % this.users.length]['categoryAnswers'].push(correctAnswer)
 		}
 		setTimeout(() => {
 			document.getElementById(correctId) ? document.getElementById(correctId).classList.remove("correct") : ''
@@ -152,10 +155,10 @@ export class GameInterfaceComponent implements OnInit {
 				//End of the game. Scores all in
 				//console.log(this.score)
 				this.users.forEach((v, i) => {
-					if (this.isWinning(i)) {
+					if (this.isWinning(i) === "W" && this.users.length > 1) {
 						this.users[i]['totalGamesWon']++
 					}
-					else {
+					else if (this.isWinning(i) === "L" && this.users.length > 1) {
 						this.users[i]['totalGamesLost']++
 					}
 					this.users[i]['totalQuestionsAnswered'] += (this.questions.length / this.users.length)
