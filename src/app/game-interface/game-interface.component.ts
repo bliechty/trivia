@@ -14,7 +14,7 @@ import { TriviaService } from '../services/trivia.service';
 	styleUrls: ['./game-interface.component.scss']
 })
 export class GameInterfaceComponent implements OnInit {
-	delayTime: number = 2000
+	delayTime: number = 1500
 	selectable: boolean = true
 	defaultAvatarURL: string = 'https://i0.wp.com/www.mvhsoracle.com/wp-content/uploads/2018/08/default-avatar.jpg?ssl=1'
 	
