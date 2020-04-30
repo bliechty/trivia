@@ -14,6 +14,7 @@ import { TriviaService } from '../services/trivia.service';
 	styleUrls: ['./game-interface.component.scss']
 })
 export class GameInterfaceComponent implements OnInit {
+	winThreshold = 0.5
 	delayTime: number = 1500
 	selectable: boolean = true
 	defaultAvatarURL: string = 'https://i0.wp.com/www.mvhsoracle.com/wp-content/uploads/2018/08/default-avatar.jpg?ssl=1'
@@ -45,10 +46,18 @@ export class GameInterfaceComponent implements OnInit {
 				highestScore = v
 			}
 		})
-		if (this.score[userIndex] > highestScore && this.score[userIndex] > 0) {
+		if (this.users.length > 1) {
+			if (this.score[userIndex] > highestScore && this.score[userIndex] > 0) {
+				winning = "W"
+			}
+			else if (this.score[userIndex] >= highestScore) {
+				winning = "T"
+			}
+		}
+		else if ((this.score[userIndex] / (this.score[userIndex] + this.wrong[userIndex])) > this.winThreshold) {
 			winning = "W"
 		}
-		else if (this.score[userIndex] >= highestScore) {
+		else if ((this.score[userIndex] / (this.score[userIndex] + this.wrong[userIndex])) >= this.winThreshold) {
 			winning = "T"
 		}
 		return winning
@@ -66,6 +75,14 @@ export class GameInterfaceComponent implements OnInit {
 				highestScore = v
 			}
 		})
+		if (this.score.length == 1) {
+			if ((this.score[0] / this.count) > this.winThreshold) {
+				winners = [this.users[0]['displayName'] ? this.users[0]['displayName'] : this.users[0]['uid']]
+			}
+			else {
+				winners = []
+			}
+		}
 		return `${winners.length > 1 ? 'Winners' : 'Winner'}: ${winners.length > 0 ? winners.toString() : 'NO ONE'}`
 	}
 	updateData() {
@@ -155,10 +172,10 @@ export class GameInterfaceComponent implements OnInit {
 				//End of the game. Scores all in
 				//console.log(this.score)
 				this.users.forEach((v, i) => {
-					if (this.isWinning(i) === "W" && this.users.length > 1) {
+					if (this.isWinning(i) === "W") {
 						this.users[i]['totalGamesWon']++
 					}
-					else if (this.isWinning(i) === "L" && this.users.length > 1) {
+					else if (this.isWinning(i) === "L") {
 						this.users[i]['totalGamesLost']++
 					}
 					else if (this.isWinning(i) === "T" && this.users.length > 1 && this.score[i] > 0) {
