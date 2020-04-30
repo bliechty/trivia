@@ -24,14 +24,14 @@
 <mat-card class="progress-card">
 	<mat-card-title class="progress-title">{{ count }}/{{ questions.length }} Questions</mat-card-title>
 	<mat-slider min="0" max="{{questions.length}}" step="1" value="{{count}}" [disabled]="true"></mat-slider>
-	<mat-card [ngClass]="{'finalMessage': true, 'hide': count < questions.length}">
+	<mat-card [ngClass]="{'finalMessage': true, 'hide': count < questions.length || users.length <= 1}">
 		<mat-card-title>{{ finalWinner() }}</mat-card-title>
   </mat-card>
   <div>
     <mat-card class="user-progress-card" *ngFor="let user of users; let i = index">
       <mat-card-title class="user-progress-title">
         {{ user['displayName'] ? user['displayName'] : user['uid'] }}
-        <span [className]="isWinning(i) === 'W' ? 'winning' : isWinning(i) === 'L' ? 'losing' : 'tie'" [innerHTML]="isWinning(i) === 'W' ? 'WINNING' : isWinning(i) === 'L' ? 'LOSING' : 'TIED'"></span>
+        <span [className]="users.length > 1 ? (isWinning(i) === 'W' ? 'winning' : isWinning(i) === 'L' ? 'losing' : 'tie') : 'hide'" [innerHTML]="isWinning(i) === 'W' ? 'WINNING' : isWinning(i) === 'L' ? 'LOSING' : 'TIED'"></span>
         <span class="info">{{score[i]}} CORRECT | {{wrong[i]}} WRONG</span>
       </mat-card-title>
       <mat-slider class="correct-slider" min="0" max="{{questions.length/users.length}}" step="1" value="{{score[i]}}" [disabled]="true"></mat-slider>
