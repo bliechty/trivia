@@ -67,7 +67,7 @@ export class SetupComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.categoriesSubscription.unsubscribe();
+    // this.categoriesSubscription.unsubscribe();
   }
 
   get questionNum() { return this.setUpForm.get('questionNum') }
