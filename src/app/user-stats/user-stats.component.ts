@@ -13,8 +13,8 @@ import { AuthService } from '../services/auth.service';
 export class UserStatsComponent implements OnInit {
   player: User;
 
-  worstCategories: string[] = ["Answer 10 questions in one category for something to show up! &#128516"];
-  bestCategories: string[]  = ["Answer 10 questions in one category for something to show up! &#128516"];
+  worstCategories: string[] = ["Insufficient data. Go play more games! &#128516"];
+  bestCategories: string[]  = ["Insufficient data. Go play more games! &#128516"];
 
   currentUserSubscription: Subscription;
 
