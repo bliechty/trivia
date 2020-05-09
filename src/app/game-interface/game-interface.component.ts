@@ -30,7 +30,7 @@ export class GameInterfaceComponent implements OnInit {
 
 	constructor(
 		private triviaService: TriviaService,
-		//private sendDataService: SendDataService,
+		private sendDataService: SendDataService,
 		private router: Router
 	){ }
 	ngOnInit(): void {
@@ -69,70 +69,7 @@ export class GameInterfaceComponent implements OnInit {
 		return `${winners.length > 1 ? 'Winners' : 'Winner'}: ${winners.length > 0 ? winners.toString() : 'NO ONE'}`
 	}
 	updateData() {
-		//let dataObject: Data = this.sendDataService.getGameData()
-		//dummy data because api suck big time bruh
-		let usersDummy: User[] = [{
-			uid: "id1",
-			displayName: "dude",
-			photoURL: "string",
-			email: "string",
-			phoneNumber: "string",
-			providerId: "string",
-			categoryAnswers: [],
-			totalGamesLost: 0,
-			totalGamesWon: 0,
-			totalQuestionsAnswered: 0,
-			totalQuestionsAnsweredIncorrectly: 0,
-			totalQuestionsAnsweredCorrectly: 0,
-			totalGamesPlayed: 0
-		},{
-			uid: "id2",
-			displayName: "bruh",
-			photoURL: "string",
-			email: "string",
-			phoneNumber: "string",
-			providerId: "string",
-			categoryAnswers: [],
-			totalGamesLost: 0,
-			totalGamesWon: 0,
-			totalQuestionsAnswered: 0,
-			totalQuestionsAnsweredIncorrectly: 0,
-			totalQuestionsAnsweredCorrectly: 0,
-			totalGamesPlayed: 0
-		}]
-		let resultDummy: Result[] = [{
-			"category": "dummy category",
-			"type": "dummy type",
-			"difficult": "hard to the max",
-			"question": "whats 1+1",
-			"correct_answer": "2",
-			"incorrect_answers": ["3","4","5"]
-		},{
-			"category": "dummy category",
-			"type": "dummy type",
-			"difficult": "hard to the max",
-			"question": "whats 2+2",
-			"correct_answer": "4",
-			"incorrect_answers": ["3","8","5"]
-		},{
-			"category": "dummy category",
-			"type": "dummy type",
-			"difficult": "hard to the max",
-			"question": "whats 3+3",
-			"correct_answer": "6",
-			"incorrect_answers": ["3","4","5"]
-		},{
-			"category": "dummy category",
-			"type": "dummy type",
-			"difficult": "hard to the max",
-			"question": "whats 4+4",
-			"correct_answer": "8",
-			"incorrect_answers": ["3","4","5"]
-		}]
-		let dataObject: Data = {
-			"users": usersDummy,
-			"questions": resultDummy
-		}
+		let dataObject: Data = this.sendDataService.getGameData()
 		this.questions = dataObject["questions"]
 		this.users = dataObject["users"]
 		this.users.forEach((v) => {
@@ -232,7 +169,7 @@ export class GameInterfaceComponent implements OnInit {
 					this.users[i]['totalQuestionsAnsweredIncorrectly'] += this.wrong[i]
 					this.users[i]['totalGamesPlayed']++
 				})
-				//this.triviaService.updateUserStats(this.users)
+				this.triviaService.updateUserStats(this.users)
 			}
 			this.selectable = true
 		}, this.delayTime)
