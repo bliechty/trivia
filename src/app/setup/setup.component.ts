@@ -20,7 +20,7 @@ import { User } from '../interfaces/user';
   styleUrls: ['./setup.component.scss']
 })
 export class SetupComponent implements OnInit {
-  categories: Category[] = [{id: 38, name: "the"}, {id: 12, name: "api"}, {id: 5, name: "isn't"}, {id: 2, name: "working"}, {id:13, name:"today"}];
+  categories: Category[];
   currentUser: User;
   data: Data = {
     questions: [],
@@ -49,7 +49,7 @@ export class SetupComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrentUser()
-    // this.categories = this.route.snapshot.data.categories
+    this.categories = this.route.snapshot.data.categories
     this.setUpForm = new FormGroup({
       'amount': new FormControl(this.game.amount),
       'questionNum': new FormControl(this.game.questionNum, [
@@ -63,7 +63,7 @@ export class SetupComponent implements OnInit {
       'type': new FormControl(this.game.type)
     }, { validators: sameAmountValidator })
 
-    // this.getCategories()
+    this.getCategories()
   }
 
   ngOnDestroy() {
