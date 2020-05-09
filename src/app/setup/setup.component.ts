@@ -114,30 +114,27 @@ export class SetupComponent implements OnInit {
     let difficulty = this.setUpForm.value.difficulty;
     let type = this.setUpForm.value.type;
 
-    // this.triviaService.getQuestionsObservable(
-    //   this.setUpForm.value.questionNum,
-    //   category === "any" ? null : category,
-    //   difficulty === "any" ? null : difficulty,
-    //   type === "any" ? null : type
-    // ).subscribe(questions => {
-    //   this.data.questions = questions
-    //   if (this.data.questions.length !== 0) {
-    //     if(Number(this.setUpForm.value.amount) === 1){
-    //       this.data.users = [this.currentUser]
-    //     }
-    //     this.router.navigate(['/game'])
-    //     console.log(this.data)
-    //     this.sendData(this.data)
-    //   }
-    //   else {
-    //     this.snackBar.open("OOPS! There doesn't seem to be any questions matching your set up!", "Close", {
-    //       duration: 2000,
-    //       panelClass: ['mat-toolbar', 'mat-warn']
-    //     })
-    //   }
-    // });
-
-    this.router.navigate(['/game'])
+    this.triviaService.getQuestionsObservable(
+      this.setUpForm.value.questionNum,
+      category === "any" ? null : category,
+      difficulty === "any" ? null : difficulty,
+      type === "any" ? null : type
+    ).subscribe(questions => {
+      this.data.questions = questions
+      if (this.data.questions.length !== 0) {
+        if(Number(this.setUpForm.value.amount) === 1){
+          this.data.users = [this.currentUser]
+        }
+        this.router.navigate(['/game'])
+        this.sendData(this.data)
+      }
+      else {
+        this.snackBar.open("OOPS! There doesn't seem to be any questions matching your set up!", "Close", {
+          duration: 2000,
+          panelClass: ['mat-toolbar', 'mat-warn']
+        })
+      }
+    });
 
   }
 
