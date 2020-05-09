@@ -47,48 +47,29 @@ export class AuthService {
         usersRef.update({...this.user}).then(_ => {
           this.allChanges(displayName);
         }).catch(_ => {
-          const categories = [
-            {
-              name: 'General Knowledge'
-            },
-            {
-              name: 'Science: Computers'
-            },
-            {
-              name: 'Science & Nature'
-            },
-            {
-              name: 'Entertainment: Film'
-            },
-            {
-              name: 'Entertainment: Video Games'
-            },
-            {
-              name: 'Entertainment: Music'
+          this.triviaService.getCategoriesObservable().subscribe(categories => {
+            const categoryAnswers: CategoryAnswer[] = [];
+
+            for (let categoryObj of categories) {
+              categoryAnswers.push({
+                answeredCorrectly: 0,
+                answeredIncorrectly: 0,
+                category: categoryObj.name
+              });
             }
-          ]
 
-          const categoryAnswers: CategoryAnswer[] = [];
-
-          for (let categoryObj of categories) {
-            categoryAnswers.push({
-              answeredCorrectly: 0,
-              answeredIncorrectly: 0,
-              category: categoryObj.name
+            this.af.collection('users').doc(this.user.uid).set({
+              ...this.user,
+              totalGamesPlayed: 0,
+              totalGamesWon: 0,
+              totalGamesLost: 0,
+              totalQuestionsAnswered: 0,
+              totalQuestionsAnsweredIncorrectly: 0,
+              totalQuestionsAnsweredCorrectly: 0,
+              categoryAnswers
+            }).then(_ => {
+              this.allChanges(displayName);
             });
-          }
-
-          this.af.collection('users').doc(this.user.uid).set({
-            ...this.user,
-            totalGamesPlayed: 0,
-            totalGamesWon: 0,
-            totalGamesLost: 0,
-            totalQuestionsAnswered: 0,
-            totalQuestionsAnsweredIncorrectly: 0,
-            totalQuestionsAnsweredCorrectly: 0,
-            categoryAnswers
-          }).then(_ => {
-            this.allChanges(displayName);
           });
         });
       }
